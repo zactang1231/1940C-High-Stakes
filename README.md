@@ -17,11 +17,11 @@ btw pls **star** our project if you want to support us :)
 
 ### Roles
 
-**Zachary Tang** - main scout, main strategist, main designer  
-**Jasper Liu** - main builder, secondary scout  
-**William Hill** - main notebooker, main admin  
-**William Headley** - main programmer, secondary builder, secondary designer  
-**Andy Jiang: Driver** - secondary builder  
+  **Zachary Tang** - main scout, main strategist, main designer  
+  **Jasper Liu** - main builder, secondary scout  
+  **William Hill** - main notebooker, main admin  
+  **William Headley** - main programmer, secondary builder, secondary designer  
+  **Andy Jiang: Driver** - secondary builder  
 
 ---
 
