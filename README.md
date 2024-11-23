@@ -9,6 +9,22 @@ btw pls **star** our project if you want to support us :)
 
 ---
 
+## Who are we?
+
+### Team Description
+
+**1940C Burnout** is a primarily second-year VEX V5RC team. Qualifying for Middle School but playing up to the High School division, we share a passion for robotics and technology. Driven by a commitment to excellence, we are determined to leave our mark in this season's VEX competition and in future seasons as well.
+
+### Roles
+
+**Zachary Tang** - main scout, main strategist, main designer  
+**Jasper Liu** - main builder, secondary scout  
+**William Hill** - main notebooker, main admin  
+**William Headley** - main programmer, secondary builder, secondary designer  
+**Andy Jiang: Driver** - secondary builder  
+
+---
+
 ## Where do I find everything?
 
 Below is an overview of our repository, mostly just the important stuff
