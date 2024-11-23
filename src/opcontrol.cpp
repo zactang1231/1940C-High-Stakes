@@ -18,7 +18,8 @@
 
 #include <iostream>
 
-void opcontrolLoop(std::string allianceColour) {
+// void opcontrolLoop(std::string allianceColour) {
+void opcontrolLoop(void* param) {
     leftMotors.set_current_limit(2500);
     rightMotors.set_current_limit(2500);
     uptake.set_current_limit(2500);
@@ -89,7 +90,7 @@ void opcontrolLoop(std::string allianceColour) {
         }
         previousY = currentY;
 
-        rejectRing(allianceColour);
+        // rejectRing(allianceColour);
 
         // delay so the Brain doesn't explode
         pros::delay(25);
