@@ -86,7 +86,7 @@ We'd love your help in contributing to this repo. To pitch in:
   ```bash  
    git commit -m "Write about what you did"  
    ```
-4. Push, then pull!
+4. Pull and push the commits - then you're done!
 
 ---
 
