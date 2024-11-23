@@ -62,8 +62,6 @@ void competition_initialize() {}
 
 /**
  * Runs during auto
- *
- * This is an example autonomous routine which demonstrates a lot of the features LemLib has to offer
  */
 void autonomous() {
     chassis.setPose(0,0,0);

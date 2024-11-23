@@ -9,6 +9,8 @@
 #include "pros/optical.hpp"
 #include <string>
 
+// all externed components
+
 extern pros::Controller controller1;
 
 extern pros::MotorGroup leftMotors;
@@ -39,9 +41,32 @@ extern lemlib::ExpoDriveCurve steerCurve;
 
 extern lemlib::Chassis chassis;
 
+// all externed variables
+
+extern bool previousB;
+extern bool previousX;
+extern bool previousY;
+
+// all externed functions
+
 extern void opcontrolLoop(std::string allianceColour);
 
 extern void robotInit();
+
+extern void prerollerForward();
+extern void prerollerReverse();
+extern void prerollerStop();
+
+extern void uptakeForward();
+extern void uptakeReverse();
+extern void handleUptakeState();
+extern void updateUptakeMotor();
+
+extern void mogoButton();
+extern void doinkerButton();
+
+extern void rejectOnOff();
+extern void rejectRing(std::string acceptColour);
 
 extern void turnToAngle(double targetAngleDegrees, int maxSpeed);
 extern void moveDistance(double targetDistanceInches, int maxSpeed);
