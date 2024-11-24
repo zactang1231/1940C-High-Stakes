@@ -103,5 +103,5 @@ void opcontrolLoop(char allianceColour) {
 }
 
 void robotInit() {
-    pros::Task opcontrolLoopTask(opcontrolLoop);
+    pros::Task opcontrolLoopTask(opcontrolWrapper);
 }
