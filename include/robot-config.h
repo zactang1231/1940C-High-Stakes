@@ -49,7 +49,7 @@ extern bool previousY;
 
 // all externed functions
 
-extern void opcontrolLoop(std::string allianceColour);
+extern void opcontrolLoop(char allianceColour);
 
 extern void robotInit();
 
@@ -66,7 +66,7 @@ extern void mogoButton();
 extern void doinkerButton();
 
 extern void rejectOnOff();
-extern void rejectRing(std::string acceptColour);
+extern void rejectRing(char acceptColour);
 
 extern void turnToAngle(double targetAngleDegrees, int maxSpeed);
 extern void moveDistance(double targetDistanceInches, int maxSpeed);
