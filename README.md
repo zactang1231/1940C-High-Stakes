@@ -29,11 +29,11 @@ btw pls **star** our project if you want to support us :)
 
 ### Roles
 
-  **Zachary Tang** - main scout, main strategist, main designer  @zactang1231
-  **Jasper Liu** - main builder, secondary scout  @pengyjas
-  **William Hill** - main notebooker, main admin  
-  **William Headley** - main programmer, secondary builder, secondary designer @wiheadley29
-  **Andy Jiang: Driver** - secondary builder @andyjiang-burnout
+  **Zachary Tang** - main scout, main strategist, main designer  @zactang1231  
+  **Jasper Liu** - main builder, secondary scout  @pengyjas  
+  **William Hill** - main notebooker, main admin    
+  **William Headley** - main programmer, secondary builder, secondary designer @wiheadley29    
+  **Andy Jiang: Driver** - secondary builder @andyjiang-burnout  
 
 ---
 
