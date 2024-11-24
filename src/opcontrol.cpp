@@ -18,9 +18,10 @@
 
 #include <iostream>
 
-void opcontrolWrapper() {
-    char allianceColour = 'R'; // Remember to change before a match
-    opcontrolLoop(allianceColour);
+void opcontrolWrapper(void* param) {
+    // char allianceColour = 'r'; // Remember to change before a match
+    char* allianceColour = static_cast<char*>(param); // Cast param to a char*
+    opcontrolLoop(*allianceColour);
 }
 
 void opcontrolLoop(char allianceColour) {
@@ -103,5 +104,6 @@ void opcontrolLoop(char allianceColour) {
 }
 
 void robotInit() {
-    pros::Task opcontrolLoopTask(opcontrolWrapper);
+    static char allianceColour = 'r'; // Define the parameter
+    pros::Task opcontrolLoopTask(opcontrolWrapper, &allianceColour);
 }
