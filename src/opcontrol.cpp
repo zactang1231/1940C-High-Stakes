@@ -20,13 +20,13 @@
 
 // Wrapper function to start the task
 void opcontrolWrapper(void* param) {
-    char* allianceColour = static_cast<char*>(param); // Cast void* param to char*
-    opcontrolLoop(*allianceColour);                  // Pass as char
+    // char* allianceColour = static_cast<char*>(param); // Cast void* param to char*
+    // opcontrolLoop(*allianceColour);                  // Pass as char
     // opcontrolLoop();                  // Pass as char
 }
 
-void opcontrolLoop(char allianceColour) {
-// void opcontrolLoop() {
+// void opcontrolLoop(char allianceColour) {
+void opcontrolLoop() {
     leftMotors.set_current_limit(2500);
     rightMotors.set_current_limit(2500);
     uptake.set_current_limit(2500);
@@ -97,7 +97,7 @@ void opcontrolLoop(char allianceColour) {
         }
         previousY = currentY;
 
-        rejectRing(allianceColour);
+        // rejectRing(allianceColour);
 
         // delay so the Brain doesn't explode
         pros::delay(25);
@@ -106,7 +106,7 @@ void opcontrolLoop(char allianceColour) {
 
 // Initialize robot and start the task
 void robotInit() {
-    static char allianceColour = 'r'; // Use 'r' for red or 'b' for blue
-    pros::Task opcontrolLoopTask(opcontrolWrapper); // Pass allianceColour pointer
+    // static char allianceColour = 'r'; // Use 'r' for red or 'b' for blue
     // pros::Task opcontrolLoopTask(opcontrolWrapper); // Pass allianceColour pointer
+    pros::Task opcontrolLoopTask(opcontrolWrapper); // Pass allianceColour pointer
 }
