@@ -49,6 +49,7 @@ extern bool previousY;
 
 // all externed functions
 
+// extern void opcontrolLoop(char allianceColour);
 extern void opcontrolLoop(char allianceColour);
 
 extern void robotInit();

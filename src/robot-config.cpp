@@ -273,7 +273,7 @@ void rejectRing(char acceptColour) {
         const int RED_THRESHOLD = 150;
         const int BLUE_THRESHOLD = 150;
 
-        if (acceptColour == "B") {
+        if (acceptColour == 'b') {
             if (red > RED_THRESHOLD && green < 100 && blue < 100) {
                 uptake.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
                 pros::delay(50);
@@ -286,7 +286,7 @@ void rejectRing(char acceptColour) {
                 pros::delay(500);
             }
         }
-        else if (acceptColour == "R") {
+        else if (acceptColour == 'r') {
             if (blue > BLUE_THRESHOLD && red < 100 && green < 100) {
                 uptake.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
                 pros::delay(50);

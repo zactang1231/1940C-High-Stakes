@@ -18,5 +18,6 @@
 
 #include <iostream>
 
-extern void opcontrolLoop();
+extern void opcontrolLoopWrapper();
+extern void opcontrolLoop(char allianceColour);
 extern void robotInit();
