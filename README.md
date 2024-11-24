@@ -58,26 +58,26 @@ Below is an overview of our repository, mostly just the important stuff
 ## What do I do with this?
 
 To run our code, you first need to:
-- [x] Install the PROS API (https://pros.cs.purdue.edu/)
+- [ ] Install the PROS API (https://pros.cs.purdue.edu/)
     - *Do this through the VSCode Extension*
-- [x] Set up the Brain, Controller and Robot 
+- [ ] Set up the Brain, Controller and Robot 
     - *Make sure all the motors, ports and other components are in accordance with the code*
 
 Then, you can use our code by:
-- [x] Cloning the repository
+- [ ] Cloning the repository
 
 ```bash  
 git clone https://github.com/whatever-your-username-is/1940C-Nationals.git
 ```  
 
-- [x] Open in your editor
+- [ ] Open in your editor
   - *Probably VSCode since we're using PROS*
-- [x] Build and Upload the code
+- [ ] Build and Upload the code
   - *There are a few ways to do this:*  
       a) Use ```pros mu``` in your terminal  
       b) Click on the PROS icon in your left sidebar, then PROS > Quick Actions > Build & Upload  
       c) Click on the PROS icon on your top right (this is a handy shortcut for Build and Upload)
-- [x] Seeing the code work (hopefully...)
+- [ ] Seeing the code work (hopefully...)
 
 ---
 
