@@ -32,9 +32,9 @@ bool previousL1 = false;
 bool rejectingOn = true;
 
 float trackWidth = 13.0;
-float wheelDiameter = 4.0; 
+float wheelDiameter = 3.0; 
 
-float horizontalOffset = -7;
+float horizontalOffset = -4.3;
 float verticalOffset = -5.4;
 
 // controller

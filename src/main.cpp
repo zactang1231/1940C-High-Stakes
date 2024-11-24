@@ -76,10 +76,7 @@ void autonomous() {
     // false // this motion will not block execution
     // ); 
 
-    // turnToAngle(90, 50);
-    moveDistance(24, 50);
-    pros::delay(1000);
-    moveDistance(-24, 50);
+    turnToAngle(90, 70);
 }
 
 /**
