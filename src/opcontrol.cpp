@@ -26,7 +26,7 @@ void opcontrolWrapper(void* param) {
 }
 
 // void opcontrolLoop(char allianceColour) {
-void opcontrolLoop() {
+void opcontrolLoop(void* param) {
     leftMotors.set_current_limit(2500);
     rightMotors.set_current_limit(2500);
     uptake.set_current_limit(2500);
@@ -108,5 +108,5 @@ void opcontrolLoop() {
 void robotInit() {
     // static char allianceColour = 'r'; // Use 'r' for red or 'b' for blue
     // pros::Task opcontrolLoopTask(opcontrolWrapper); // Pass allianceColour pointer
-    pros::Task opcontrolLoopTask(opcontrolWrapper); // Pass allianceColour pointer
+    pros::Task opcontrolLoopTask(opcontrolLoop); // Pass allianceColour pointer
 }
