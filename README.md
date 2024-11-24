@@ -1,7 +1,7 @@
 <hr>
 <img src="Logo.png">
 
-# 1940C Burnout - Nationals Repo 🔥
+# 1940C Burnout - Full Repo 🔥
 
 Hi! You've stumbled upon the official 1940C Burnout repository for the 2024 Australian National Championships.
 We'll use this for our Nationals code and we'll frequently update it as we develop our program. For our States code, visit our States repository.
@@ -58,26 +58,26 @@ Below is an overview of our repository, mostly just the important stuff
 ## What do I do with this?
 
 To run our code, you first need to:
-1. Install the PROS API (https://pros.cs.purdue.edu/)
+- [x] Install the PROS API (https://pros.cs.purdue.edu/)
     - *Do this through the VSCode Extension*
-2. Set up the Brain, Controller and Robot 
+- [x] Set up the Brain, Controller and Robot 
     - *Make sure all the motors, ports and other components are in accordance with the code*
 
 Then, you can use our code by:
-1. Cloning the repository
+- [x] Cloning the repository
 
 ```bash  
 git clone https://github.com/whatever-your-username-is/1940C-Nationals.git
 ```  
 
-2. Open in your editor
+- [x] Open in your editor
   - *Probably VSCode since we're using PROS*
-3. Build and Upload the code
+- [x] Build and Upload the code
   - *There are a few ways to do this:*  
       a) Use ```pros mu``` in your terminal  
       b) Click on the PROS icon in your left sidebar, then PROS > Quick Actions > Build & Upload  
       c) Click on the PROS icon on your top right (this is a handy shortcut for Build and Upload)
-4. Seeing the code work (hopefully...)
+- [x] Seeing the code work (hopefully...)
 
 ---
 
