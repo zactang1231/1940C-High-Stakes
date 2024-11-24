@@ -9,6 +9,17 @@ btw pls **star** our project if you want to support us :)
 
 ---
 
+## Table of Contents
+
+- [Who are we?](#who-are-we)  
+- [Where do I find everything?](#where-do-i-find-everything)  
+- [What do I do with this?](#what-do-i-do-with-this)  
+- [What can I do?](#what-can-i-do)  
+- [Help! I'm confused!](#help-im-confused) 
+- [License](#license)  
+
+---
+
 ## Who are we?
 
 ### Team Description
