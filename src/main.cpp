@@ -59,7 +59,7 @@ void competition_initialize() {}
 
 // get a path used for pure pursuit
 // this needs to be put outside a function
-// ASSET(example_txt); // '.' replaced with "_" to make c++ happy
+ASSET(skillsauto1_txt); // '.' replaced with "_" to make c++ happy
 
 /**
  * Runs during auto
