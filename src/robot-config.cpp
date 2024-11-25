@@ -37,6 +37,8 @@ float wheelDiameter = 3.0;
 float horizontalOffset = -4.3;
 float verticalOffset = -5.4;
 
+char acceptColour;
+
 // controller
 pros::Controller controller1(pros::E_CONTROLLER_MASTER);
 
@@ -261,7 +263,7 @@ void doinkerButton() {
     }
 }
 
-void rejectRing(char acceptColour) {
+void rejectRing() {
     if (rejectingOn) {
         // Colour sorting
         pros::c::optical_rgb_s_t rgb = reject.get_rgb();
@@ -317,6 +319,14 @@ void rejectOnOff() {
     } else {
         rejectingOn = true;
         printRejectStatus();
+    }
+}
+
+void setAllianceColour(char allianceColour){
+    if (allianceColour == "red") {
+        acceptColour = 'r'
+    } else if (allianceColour == "blue") {
+        acceptColour = 'b'
     }
 }
 

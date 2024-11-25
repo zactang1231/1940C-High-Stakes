@@ -67,7 +67,7 @@ extern void mogoButton();
 extern void doinkerButton();
 
 extern void rejectOnOff();
-extern void rejectRing(char acceptColour);
+extern void rejectRing();
 
 extern void turnToAngle(double targetAngleDegrees, int maxSpeed);
 extern void moveDistance(double targetDistanceInches, int maxSpeed);
