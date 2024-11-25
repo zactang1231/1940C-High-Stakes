@@ -322,11 +322,11 @@ void rejectOnOff() {
     }
 }
 
-void setAllianceColour(char allianceColour){
-    if (allianceColour == "red") {
-        acceptColour = 'r'
-    } else if (allianceColour == "blue") {
-        acceptColour = 'b'
+void setAllianceColour(char allianceColour) {
+    if (allianceColour == 'r') {
+        acceptColour = 'r';
+    } else if (allianceColour == 'b') {
+        acceptColour = 'b';
     }
 }
 

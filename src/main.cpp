@@ -65,7 +65,7 @@ void competition_initialize() {}
  * Runs during auto
  */
 void autonomous() {
-    setAllianceColour();
+    setAllianceColour('r');
     chassis.setPose(0,0,0);
 
     leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
@@ -84,7 +84,7 @@ void autonomous() {
  * Runs in driver control
  */
 void opcontrol() {
-    setAllianceColour();
+    setAllianceColour('r');
     robotInit();
     leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
     rightMotors.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
