@@ -60,7 +60,9 @@ pros::MotorGroup rightMotors({12, 13, 5}, pros::MotorGearset::green); // right m
 
 // motors - migrated from robot-config.cpp from states code
 pros::Motor preroller(-1, pros::MotorGearset::green);
-pros::MotorGroup uptake({3,15}, pros::MotorGearset::green);
+// pros::MotorGroup uptake({3,15}, pros::MotorGearset::green);
+pros::Motor uptake(15, pros::MotorGearset::green);
+pros::Motor LB(3, pros::MotorGearset::green);
 
 // pistons - migrated from robot-config.cpp from states code
 pros::adi::DigitalOut mogo('A');
@@ -148,6 +150,18 @@ void prerollerReverse() {
 
 void prerollerStop() {
     preroller.move(0);
+}
+
+void LBForward() {
+    lb.move(127);
+}
+
+void LBReverse() {
+    lb.move(-127);
+}
+
+void LBStop() {
+    lb.move(0);
 }
 
 void handleUptakeState() {

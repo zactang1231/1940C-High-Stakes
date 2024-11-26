@@ -58,6 +58,14 @@ void opcontrolLoop(void* param) {
             prerollerStop();
         }
 
+        if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) {
+            LBForward();
+        } else if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+            LBReverse();
+        } else {
+            LBStop();
+        }
+
         if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
             uptakeForward(); // Forward has priority
         } else if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {

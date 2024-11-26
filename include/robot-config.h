@@ -58,6 +58,10 @@ extern void prerollerForward();
 extern void prerollerReverse();
 extern void prerollerStop();
 
+extern void LBForward();
+extern void LBReverse();
+extern void LBStop();
+
 extern void uptakeForward();
 extern void uptakeReverse();
 extern void handleUptakeState();
