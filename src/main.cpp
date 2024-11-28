@@ -70,14 +70,12 @@ void autonomous() {
 
     leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     rightMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-    // chassis.turnToHeading(
-    // 270,
-    // 4000,
-    // {.maxSpeed = 60}, // will never exceed 120
-    // false // this motion will not block execution
-    // ); 
-
-    turnToAngle(90, 70);
+    chassis.turnToHeading(
+        270,
+        4000,
+        {.maxSpeed = 60}, // will never exceed 120
+        false // this motion will not block execution
+    ); 
 }
 
 /**

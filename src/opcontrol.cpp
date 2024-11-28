@@ -61,13 +61,13 @@ void opcontrolLoop(void* param) {
             prerollerStop();
         }
 
-        // if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
-        //     LBForward();
-        // } else if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
-        //     LBReverse();
-        // } else {
-        //     LBStop();
-        // }
+        if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+            LBForward();
+        } else if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+            LBReverse();
+        } else {
+            LBStop();
+        }
 
         if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
             uptakeForward(); // Forward has priority
@@ -104,7 +104,7 @@ void opcontrolLoop(void* param) {
 
         // lb.move_absolute(-500, 50);
 
-        lb.move_absolute(-210, 20);
+        // lb.move_absolute(-210, 20);
 
         // delay so the Brain doesn't explode
         pros::delay(25);
