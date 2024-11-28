@@ -46,7 +46,7 @@ pros::Controller controller1(pros::E_CONTROLLER_MASTER);
 
 // pros::Motor L1(-11, pros::MotorGearset::green);
 // pros::Motor L2(-14, pros::MotorGearset::green);
-// pros::Motor L3(-16, pros::MotorGearset::green);
+// pros::Motor L3(-16, pros::MotorGearset::green);x
 
 // pros::Motor R1(12, pros::MotorGearset::green);
 // pros::Motor R2(13, pros::MotorGearset::green);
@@ -62,7 +62,7 @@ pros::MotorGroup rightMotors({12, 13, 5}, pros::MotorGearset::green); // right m
 pros::Motor preroller(-1, pros::MotorGearset::green);
 // pros::MotorGroup uptake({3,15}, pros::MotorGearset::green);
 pros::Motor uptake(15, pros::MotorGearset::green);
-pros::Motor LB(3, pros::MotorGearset::green);
+pros::Motor lb(3, pros::MotorGearset::green);
 
 // pistons - migrated from robot-config.cpp from states code
 pros::adi::DigitalOut mogo('A');
