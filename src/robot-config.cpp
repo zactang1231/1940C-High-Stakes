@@ -34,8 +34,8 @@ bool rejectingOn = true;
 float trackWidth = 13.0;
 float wheelDiameter = 3.0; 
 
-float horizontalOffset = -4.3;
-float verticalOffset = -5.4;
+float horizontalOffset = -5.02;
+float verticalOffset = -0.75;
 
 char acceptColour;
 
