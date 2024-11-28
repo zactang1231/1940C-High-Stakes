@@ -18,6 +18,7 @@ extern pros::MotorGroup rightMotors;
 
 extern pros::Motor preroller;
 extern pros::Motor uptake;
+extern pros::Motor lb;
 
 extern pros::adi::DigitalOut mogo;
 extern pros::adi::DigitalOut doinker;

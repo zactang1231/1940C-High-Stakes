@@ -35,6 +35,7 @@ void opcontrolLoop(void* param) {
     
     preroller.set_brake_mode (pros::E_MOTOR_BRAKE_COAST);
     uptake.set_brake_mode (pros::E_MOTOR_BRAKE_COAST);
+    lb.set_brake_mode (pros::E_MOTOR_BRAKE_HOLD);
 
     reject.set_led_pwm(100);
 
