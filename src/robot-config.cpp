@@ -24,6 +24,9 @@ bool intake2Activated = false;
 enum UptakeState { OFF, FORWARD, REVERSE };
 UptakeState uptakeState = OFF;
 
+enum lbState { LOADING, DEFAULT, SCORING };
+lbState LBState = DEFAULT;
+
 bool previousB = false;
 bool previousX = false;
 bool previousY = false;
@@ -38,6 +41,8 @@ float horizontalOffset = -5.02;
 float verticalOffset = -0.75;
 
 char acceptColour;
+
+float LBTargetPos = 0.0;
 
 // controller
 pros::Controller controller1(pros::E_CONTROLLER_MASTER);
@@ -138,7 +143,12 @@ lemlib::ExpoDriveCurve steerCurve(3, // joystick deadband out of 127
 // create the chassis
 lemlib::Chassis chassis(drivetrain, linearController, angularController, sensors, &throttleCurve, &steerCurve);
 
+// Mutex inits
+
 pros::Mutex uptake_mutex;
+pros::Mutex lb_mutex;
+
+// Preroller moves
 
 void prerollerForward() {
     preroller.move(127);
@@ -152,24 +162,74 @@ void prerollerStop() {
     preroller.move(0);
 }
 
-void LBForward() {
-    lb.move(-127);
+// LB moves
+
+// void LBForward() {
+//     lb.move(-127);
+// }
+
+// void LBReverse() {
+//     lb.move(127);
+// }
+
+// void LBStop() {
+//     lb.move(0);
+// }
+
+void handleLBStateDown() {
+    if (LBState == SCORING) {
+        LBState = DEFAULT; // Go to default if scoring 
+    } else if (LBState == DEFAULT) {
+        LBState= LOADING; // Go to loading if default
+    }
 }
 
-void LBReverse() {
-    lb.move(127);
+void handleLBStateUp() {
+    if (LBState == LOADING) {
+        LBState = DEFAULT; // Go to default if loading 
+    } else if (LBState == DEFAULT) {
+        LBState= SCORING; // Go to scoring if default
+    }
 }
 
-void LBStop() {
-    lb.move(0);
+void updateLBMotor() {
+    lb_mutex.take(); // lock mutex (uptake is mine now)
+
+    switch (LBState) {
+        case LOADING:
+            lb.move_absolute(0, 100);
+            LBTargetPos = 0;
+            std::cout << "Lady Brown: Scoring" << std::endl;
+            break;
+        case DEFAULT:
+        default:
+            lb.move_absolute(-210, 100);
+            LBTargetPos = 210;
+            std::cout << "Lady Brown: Default" << std::endl;
+            break;
+        case SCORING:
+            lb.move_absolute(-270, 100);
+            LBTargetPos = 270;
+            std::cout << "Lady Brown: Loading" << std::endl;
+            break;
+    }
+
+    lb_mutex.give(); // release mutex (uptake can be used elsewhere)
 }
 
-void LBDefault(){
-
+void LBSpinToTarget() {
+    if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+        handleLBStateUp();
+    } else if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+        handleLBStateDown();
+    }
+    handleLBState();
+    updateLBMotor();
+    lb.move_absolute(-LBTargetPos, 100);
 }
 
 void handleUptakeState() {
-        bool currentL1 = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_L1);
+    bool currentL1 = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_L1);
     bool currentL2 = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_L2);
 
     // Toggle forward state with L1
@@ -347,6 +407,8 @@ void setAllianceColour(char allianceColour) {
         acceptColour = 'b';
     }
 }
+
+// Raw movement
 
 void turnToAngle(double targetAngleDegrees, int maxSpeed) {
  // Convert the target angle to radians

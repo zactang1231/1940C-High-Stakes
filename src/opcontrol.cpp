@@ -61,14 +61,6 @@ void opcontrolLoop(void* param) {
             prerollerStop();
         }
 
-        if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
-            LBForward();
-        } else if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
-            LBReverse();
-        } else {
-            LBStop();
-        }
-
         if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
             uptakeForward(); // Forward has priority
         } else if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
@@ -102,8 +94,6 @@ void opcontrolLoop(void* param) {
 
         rejectRing();
 
-        // lb.move_absolute(-500, 50);
-
         // lb.move_absolute(-210, 20);
 
         // delay so the Brain doesn't explode
@@ -114,4 +104,5 @@ void opcontrolLoop(void* param) {
 // Initialize robot and start the task
 void robotInit() {
     pros::Task opcontrolLoopTask(opcontrolLoop);
+    pros::Task lbLoopTask(LBSpinToTarget);
 }
