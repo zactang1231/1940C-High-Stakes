@@ -62,7 +62,7 @@ pros::MotorGroup rightMotors({12, 13, 5}, pros::MotorGearset::green); // right m
 pros::Motor preroller(-1, pros::MotorGearset::green);
 // pros::MotorGroup uptake({3,15}, pros::MotorGearset::green);
 pros::Motor uptake(15, pros::MotorGearset::green);
-pros::Motor lb(3, pros::MotorGearset::green);
+pros::Motor lb(3, pros::MotorGearset::green, true);
 
 // pistons - migrated from robot-config.cpp from states code
 pros::adi::DigitalOut mogo('A');

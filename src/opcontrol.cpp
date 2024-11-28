@@ -59,7 +59,7 @@ void opcontrolLoop(void* param) {
             prerollerStop();
         }
 
-        if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) {
+        if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
             LBForward();
         } else if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
             LBReverse();
