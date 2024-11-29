@@ -17,9 +17,13 @@
 
 #include <iostream>
 
+// Resource states (bools)
+
 bool mogoActivated = false;
 bool doinkerActivated = false;
 bool intake2Activated = false;
+
+// Resource states (enums)
 
 enum UptakeState { OFF, FORWARD, REVERSE };
 UptakeState uptakeState = OFF;
@@ -27,10 +31,14 @@ UptakeState uptakeState = OFF;
 enum lbState { LOADING, DEFAULT, SCORING };
 lbState LBState = DEFAULT;
 
+// Button debouncers
+
 bool previousB = false;
 bool previousX = false;
 bool previousY = false;
 bool previousL1 = false;
+bool previousRight = false;
+bool previousDown = false;
 
 bool rejectingOn = true;
 
@@ -228,11 +236,20 @@ void updateLBMotor() {
 
 void LBSpinToTarget() {
     while (true) {
-        if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+        bool currentRight = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT);
+        bool currentDown = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN);
+
+        if (currentRight && !previousRight) {
             handleLBStateUp();
-        } else if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+        }
+        if (currentDown && !previousDown) {
             handleLBStateDown();
         }
+
+        previousRight = currentRight;
+        previousDown = currentDown; 
+
+    updateLBMotor();
         updateLBMotor();
         lb.move_absolute(LBTargetPos, 70);
 
