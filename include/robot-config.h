@@ -59,8 +59,6 @@ extern void prerollerForward();
 extern void prerollerReverse();
 extern void prerollerStop();
 
-extern void LBSpinToTarget();
-
 extern void uptakeForward();
 extern void uptakeReverse();
 extern void handleUptakeState();

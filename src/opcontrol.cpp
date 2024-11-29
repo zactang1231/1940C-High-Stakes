@@ -15,6 +15,7 @@
 #include <string>
 #include <type_traits>
 #include "robot-config.h"
+#include "lady-brown.h"
 
 #include <iostream>
 
