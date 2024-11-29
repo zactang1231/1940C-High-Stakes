@@ -225,8 +225,8 @@ void updateLBMotor() {
             std::cout << "Lady Brown: Default" << std::endl;
             break;
         case SCORING:
-            // lb.move_absolute(-360, 100);
-            LBTargetPos = -390;
+            // lb.move_absolute(-500, 100);
+            LBTargetPos = -720;
             std::cout << "Lady Brown: Loading" << std::endl;
             break;
     }
