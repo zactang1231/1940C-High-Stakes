@@ -169,7 +169,7 @@ void prerollerStop() {
 // }
 
 // void LBReverse() {
-//     lb.move(127);
+//     lb.move(127);controller1.clear();
 // }
 
 // void LBStop() {

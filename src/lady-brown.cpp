@@ -28,6 +28,51 @@ float LBTargetPos = 210;
 
 pros::Mutex lb_mutex;
 
+// PID constants
+double kP = 0.7; // Proportional gain
+double kI = 0.0; // Integral gain
+double kD = 0.6; // Derivative gain
+
+void LBMoveToTarget(double targetPosition) {
+    static double error = 0;               // Difference between target and current position
+    static double lastError = 0;           // Previous error for derivative calculation
+    static double integral = 0;            // Integral of errors
+    static const double tolerance = 5;     // Tolerance for stopping, in degrees
+    static const double maxSpeed = 200;    // Maximum motor speed
+    double motorSpeed = 0;                 // Calculated motor speed
+
+    // Get the current position
+    double currentPosition = lb.get_position();
+
+    // Calculate error
+    error = targetPosition - currentPosition;
+
+    // Exit if within tolerance
+    if (fabs(error) <= tolerance) {
+        lb.move(0); // Stop the motor
+        return;     // Exit the function
+    }
+
+    // Calculate integral (accumulated error)
+    integral += error;
+    integral = fmax(fmin(integral, 100), -100); // Anti-windup (limit integral)
+
+    // Calculate derivative (change in error)
+    double derivative = error - lastError;
+
+    // Calculate motor speed using PID formula
+    motorSpeed = (kP * error) + (kI * integral) + (kD * derivative);
+
+    // Clamp motor speed to maximum limits
+    motorSpeed = fmax(fmin(motorSpeed, maxSpeed), -maxSpeed);
+
+    // Set motor speed
+    lb.move(motorSpeed);
+
+    // Update last error
+    lastError = error;
+}
+
 void handleLBStateDown() {
     if (LBState == SCORING) {
         LBState = DEFAULT; // Go to default if scoring 
@@ -65,7 +110,7 @@ void updateLBMotor() {
             break;
         case DEFAULT:
             // lb.move_absolute(-210, 100);
-            LBTargetPos = -210;
+            LBTargetPos = -290;
             std::cout << "Lady Brown: Default" << std::endl;
             break;
         case SCORING:
@@ -83,21 +128,21 @@ void LBSpinToTarget() {
         bool currentRight = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT);
         bool currentDown = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN);
 
-        if (currentRight && !previousRight) {
+        if (currentRight && !previousRight) { // Rising edge detection
             handleLBStateUp();
         }
-        if (currentDown && !previousDown) {
+        if (currentDown && !previousDown) { // Rising edge detection
             handleLBStateDown();
         }
 
-        previousRight = currentRight;
-        previousDown = currentDown; 
+        previousRight = currentRight; // Update state
+        previousDown = currentDown;
 
-    updateLBMotor();
         updateLBMotor();
-        lb.move_absolute(LBTargetPos, 70);
+        LBMoveToTarget(LBTargetPos);
+        // lb.move_absolute(LBTargetPos, 100);
 
-        // delay so the Brain doesn't explode
-        pros::delay(25);
+        pros::delay(25); // Allow time for button state to settle
+
     }
 }
