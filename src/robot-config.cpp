@@ -28,17 +28,12 @@ bool intake2Activated = false;
 enum UptakeState { OFF, FORWARD, REVERSE };
 UptakeState uptakeState = OFF;
 
-enum lbState { LOADING, DEFAULT, SCORING };
-lbState LBState = DEFAULT;
-
 // Button debouncers
 
 bool previousB = false;
 bool previousX = false;
 bool previousY = false;
 bool previousL1 = false;
-bool previousRight = false;
-bool previousDown = false;
 
 bool rejectingOn = true;
 
@@ -49,8 +44,6 @@ float horizontalOffset = -5.02;
 float verticalOffset = -0.75;
 
 char acceptColour;
-
-float LBTargetPos = 210;
 
 // controller
 pros::Controller controller1(pros::E_CONTROLLER_MASTER);
@@ -154,7 +147,6 @@ lemlib::Chassis chassis(drivetrain, linearController, angularController, sensors
 // Mutex inits
 
 pros::Mutex uptake_mutex;
-pros::Mutex lb_mutex;
 
 // Preroller moves
 

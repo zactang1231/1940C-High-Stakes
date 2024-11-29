@@ -1,5 +1,6 @@
 #include "lemlib/chassis/trackingWheel.hpp"
 #include "main.h"
+#include "robot-config.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "pros/adi.hpp"
 #include "pros/llemu.hpp"
@@ -16,6 +17,16 @@
 #include <type_traits>
 
 #include <iostream>
+
+enum lbState { LOADING, DEFAULT, SCORING };
+lbState LBState = DEFAULT;
+
+bool previousRight = false;
+bool previousDown = false;
+
+float LBTargetPos = 210;
+
+pros::Mutex lb_mutex;
 
 void handleLBStateDown() {
     if (LBState == SCORING) {
