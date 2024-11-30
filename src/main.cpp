@@ -68,11 +68,12 @@ ASSET(skillsauto1_txt); // '.' replaced with "_" to make c++ happy
  * Runs during auto
  */
 void autonomous() {
-    setAllianceColour('r');
-    chassis.setPose(0,0,0);
-    // autocontrolInit();
     leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     rightMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+
+    setAllianceColour('r');
+    chassis.setPose(0,0,0);
+    autocontrolInit();
 
     chassis.moveToPoint(0, 24, 100000);
 }
@@ -81,6 +82,9 @@ void autonomous() {
  * Runs in driver control
  */
 void opcontrol() {
+    leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+    leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+
     setAllianceColour('r');
     opcontrolInit();
 }
