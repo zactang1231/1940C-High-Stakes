@@ -70,12 +70,12 @@ void autonomous() {
     chassis.setPose(0,0,0);
     autocontrolInit();
 
-    chassis.turnToHeading(
-        270,
-        4000,
-        {.maxSpeed = 60}, // will never exceed 120
-        false // this motion will not block execution
-    ); 
+    // chassis.turnToHeading(
+    //     270,
+    //     4000,
+    //     {.maxSpeed = 60}, // will never exceed 120
+    //     false // this motion will not block execution
+    // ); 
 }
 
 /**

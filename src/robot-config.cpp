@@ -440,4 +440,5 @@ void opcontrolInit() {
 
 void autocontrolInit() {
     pros::Task autocontrolLoopTask(autocontrolLoop);
+    pros::Task lbLoopTask(LBSpinToTarget);
 }

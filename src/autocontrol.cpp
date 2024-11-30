@@ -45,6 +45,10 @@ void autocontrolLoop(void* param) {
     
     lb.tare_position();
 
+    preroller.move(0);
+    uptake.move(0);
+    uptake.move(0);
+
     // andy likes SPLIT ARCADE drive
     // tank drive is too confusing :(
 
