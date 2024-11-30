@@ -55,6 +55,7 @@ void autocontrolLoop(void* param) {
     // this runs during tele-op the whole time
     while (true) {
         rejectRing();
+        LBSpinToTarget();
 
         // delay so the Brain doesn't explode
         pros::delay(25);
