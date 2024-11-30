@@ -26,6 +26,7 @@ ASSET(skillsauto1_txt);
 ASSET(skillsauto2_txt);
 ASSET(skillsauto3_txt);
 ASSET(skillsauto4_txt);
+ASSET(skillsauto5_txt);
 
 void autonSkills() {
     preroller.move(127);
@@ -73,4 +74,39 @@ void autonSkills() {
     chassis.moveToPose(-47, -56, 0, 4000, {.forwards = false});
     chassis.moveToPose(-60, -60, 135, 4000, {.forwards = false});
     mogo.set_value(false);
+
+    // --- Q3 --- //
+
+    // First path
+    chassis.moveToPose(-52, -52, 0, 4000);
+    uptake.move(0);
+    chassis.follow(skillsauto5_txt, 15, 10000);
+    // Go get mogo
+    chassis.moveToPose(47, -12, 0, 4000,  {.forwards = false});
+    mogo.set_value(true);
+    // Q3 Rings
+    uptake.move(127);
+    chassis.moveToPose(47.5, 0, 315, 4000);
+    chassis.moveToPose(23.5, 23.5, 315, 4000);
+    chassis.moveToPose(47.5, 0, 315, 4000, {.forwards = false});
+    chassis.moveToPose(23.5, -23.5, 225, 4000);
+    chassis.moveToPose(23.5, -47, 180, 4000);
+    chassis.moveToPose(59, -47, 90, 4000);
+    chassis.moveToPose(47, -47, 180, 4000, {.forwards = false});
+    chassis.moveToPose(47, -59, 180, 4000);
+    // Q3 mogo
+    chassis.moveToPose(47, -56, 0, 4000, {.forwards = false});
+    chassis.moveToPose(60, -60, 135, 4000, {.forwards = false});
+    mogo.set_value(false);
+
+    // --- Q4 --- //
+
+    // Go get mogo
+    chassis.moveToPose(59, 11.5, 0, 4000, {.forwards = false});
+    // Q4 mogo
+    chassis.moveToPose(47, -47, 0, 4000, {.forwards = false});
+    chassis.moveToPose(60, -60, 135, 4000, {.forwards = false});
+    mogo.set_value(false);
+
+    chassis.moveToPoint(42, 42, 4000);
 }   
