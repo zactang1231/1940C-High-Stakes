@@ -85,9 +85,9 @@ pros::Optical reject(4);
 
 // tracking wheels. we are using rotation sensors with 2" wheels
 pros::Rotation horizontalEnc(18);
-pros::Rotation verticalEnc(6);
-lemlib::TrackingWheel horizontal(&horizontalEnc, lemlib::Omniwheel::NEW_2, horizontalOffset); // tune
-lemlib::TrackingWheel vertical(&verticalEnc, lemlib::Omniwheel::NEW_2, verticalOffset); // tune
+pros::Rotation verticalEnc(-6);
+lemlib::TrackingWheel horizontal(&horizontalEnc, lemlib::Omniwheel::NEW_2, horizontalOffset);
+lemlib::TrackingWheel vertical(&verticalEnc, lemlib::Omniwheel::NEW_2, verticalOffset);
 
 /* LEMLIB DRIVETRAIN */
 
@@ -101,21 +101,23 @@ lemlib::Drivetrain drivetrain(&leftMotors, // left motor group
 );
 
 // lateral motion controller
-lemlib::ControllerSettings linearController(10, // proportional gain (kP)
+lemlib::ControllerSettings linearController(7, // proportional gain (kP)
                                             0, // integral gain (kI)
-                                            3, // derivative gain (kD)
-                                            3, // anti windup
+                                            25, // derivative gain (kD)
+                                            0, // anti windup
                                             1, // small error range, in inches
                                             100, // small error range timeout, in milliseconds
                                             3, // large error range, in inches
                                             500, // large error range timeout, in milliseconds
-                                            20 // maximum acceleration (slew)
+                                            40 // maximum acceleration (slew)
 );
 
+// 7, 0, 20
+
 // angular motion controller
-lemlib::ControllerSettings angularController(8, // proportional gain (kP)
+lemlib::ControllerSettings angularController(4, // proportional gain (kP)
                                              0, // integral gain (kI)1
-                                             0, // derivative gain (kD)
+                                             40, // derivative gain (kD)
                                              0, // anti windup
                                              1, // small error range, in degrees
                                              100, // small error range timeout, in milliseconds

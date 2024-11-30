@@ -23,6 +23,8 @@
 void initialize() {
     pros::lcd::initialize(); // initialize brain screen
     chassis.calibrate(); // calibrate sensors
+    verticalEnc.reset();
+    horizontalEnc.reset();
 
     // the default rate is 50. however, if you need to change the rate, you
     // can do the following.
@@ -68,14 +70,11 @@ ASSET(skillsauto1_txt); // '.' replaced with "_" to make c++ happy
 void autonomous() {
     setAllianceColour('r');
     chassis.setPose(0,0,0);
-    autocontrolInit();
+    // autocontrolInit();
+    leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    rightMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
-    // chassis.turnToHeading(
-    //     270,
-    //     4000,
-    //     {.maxSpeed = 60}, // will never exceed 120
-    //     false // this motion will not block execution
-    // ); 
+    chassis.moveToPoint(0, 24, 100000);
 }
 
 /**
