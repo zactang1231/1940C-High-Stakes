@@ -13,6 +13,7 @@
 #include "robot-config.h"
 #include "opcontrol.h"
 #include "autocontrol.h"
+#include "auton-skills.h"
 
 /**pros c fetch <template>
  * Runs initialization code. This occurs as soon as the program is started.
@@ -38,7 +39,7 @@ void initialize() {
     pros::Task screenTask([&]() {
         while (true) {
             // print robot location to the brain screen
-            pros::screen::print(TEXT_MEDIUM, 0, "Yay! The code works, the bot has been initialised. Good job for now.");
+            pros::screen::print(TEXT_MEDIUM, 0, "Yay! Init is done, thanks for waiting.");
             pros::screen::print(TEXT_MEDIUM, 1, "X: %f", chassis.getPose().x); // x
             pros::screen::print(TEXT_MEDIUM, 2, "Y: %f", chassis.getPose().y); // y
             pros::screen::print(TEXT_MEDIUM, 3, "Theta: %f", chassis.getPose().theta); // heading
@@ -60,10 +61,6 @@ void disabled() {}
  */
 void competition_initialize() {}
 
-// get a path used for pure pursuit
-// this needs to be put outside a function
-ASSET(skillsauto1_txt); // '.' replaced with "_" to make c++ happy
-
 /**
  * Runs during auto
  */
@@ -75,7 +72,10 @@ void autonomous() {
     chassis.setPose(0,0,0);
     autocontrolInit();
 
-    chassis.moveToPoint(0, 24, 100000);
+    autonSkills();
+
+    // chassis.moveToPoint(0, 24, 100000);
+    // chassis.turnToHeading(270, 100000);
 }
 
 /**

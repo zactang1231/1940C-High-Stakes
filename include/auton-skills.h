@@ -18,7 +18,4 @@
 
 #include <iostream>
 
-extern void handleLBStateUp();
-extern void handleLBStateDown();
-
-extern void LBSpinToTarget();
+extern void autonSkills();
