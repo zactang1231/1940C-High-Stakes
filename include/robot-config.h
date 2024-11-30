@@ -73,3 +73,5 @@ extern void setAllianceColour(char allianceColour);
 
 extern void turnToAngle(double targetAngleDegrees, int maxSpeed);
 extern void moveDistance(double targetDistanceInches, int maxSpeed);
+
+extern void robotInit();

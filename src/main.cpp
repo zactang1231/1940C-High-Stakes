@@ -12,6 +12,7 @@
 #include "pros/screen.h"
 #include "robot-config.h"
 #include "opcontrol.h"
+#include "autocontrol.h"
 
 /**pros c fetch <template>
  * Runs initialization code. This occurs as soon as the program is started.

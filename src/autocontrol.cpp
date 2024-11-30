@@ -19,7 +19,7 @@
 
 #include <iostream>
 
-void opcontrolLoop(void* param) {
+void autocontrolLoop(void* param) {
     leftMotors.set_current_limit(2500);
     rightMotors.set_current_limit(2500);
     uptake.set_current_limit(2500);

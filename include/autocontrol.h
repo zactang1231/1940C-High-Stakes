@@ -18,5 +18,4 @@
 
 #include <iostream>
 
-extern void opcontrolLoopWrapper();
-extern void opcontrolLoop(void* param);
+extern void autocontrolLoop(void* param);

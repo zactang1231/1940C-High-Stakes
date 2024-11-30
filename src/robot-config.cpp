@@ -1,5 +1,8 @@
 #include "lemlib/chassis/trackingWheel.hpp"
 #include "main.h"
+#include "opcontrol.h"
+#include "autocontrol.h"
+#include "lady-brown.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "pros/adi.hpp"
 #include "pros/llemu.hpp"
@@ -427,4 +430,10 @@ void moveDistance(double targetDistanceInches, int maxSpeed) {
     // Stop motors
     leftMotors.move_velocity(0);
     rightMotors.move_velocity(0);
+}
+
+// Initialize robot and start the task
+void robotInit() {
+    pros::Task opcontrolLoopTask(opcontrolLoop);
+    pros::Task lbLoopTask(LBSpinToTarget);
 }
