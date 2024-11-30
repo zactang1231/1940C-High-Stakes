@@ -433,7 +433,11 @@ void moveDistance(double targetDistanceInches, int maxSpeed) {
 }
 
 // Initialize robot and start the task
-void robotInit() {
+void opcontrolInit() {
     pros::Task opcontrolLoopTask(opcontrolLoop);
     pros::Task lbLoopTask(LBSpinToTarget);
+}
+
+void autocontrolInit() {
+    pros::Task autocontrolLoopTask(autocontrolLoop);
 }

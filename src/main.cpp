@@ -68,6 +68,7 @@ ASSET(skillsauto1_txt); // '.' replaced with "_" to make c++ happy
 void autonomous() {
     setAllianceColour('r');
     chassis.setPose(0,0,0);
+    autocontrolInit();
 
     chassis.turnToHeading(
         270,
@@ -82,5 +83,5 @@ void autonomous() {
  */
 void opcontrol() {
     setAllianceColour('r');
-    robotInit();
+    opcontrolInit();
 }
