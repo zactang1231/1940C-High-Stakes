@@ -69,8 +69,6 @@ void autonomous() {
     setAllianceColour('r');
     chassis.setPose(0,0,0);
 
-    leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-    rightMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     chassis.turnToHeading(
         270,
         4000,
@@ -85,6 +83,4 @@ void autonomous() {
 void opcontrol() {
     setAllianceColour('r');
     robotInit();
-    leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-    rightMotors.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 }

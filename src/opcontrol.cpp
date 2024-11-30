@@ -20,6 +20,9 @@
 #include <iostream>
 
 void opcontrolLoop(void* param) {
+    leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+    rightMotors.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+
     leftMotors.set_current_limit(2500);
     rightMotors.set_current_limit(2500);
     uptake.set_current_limit(2500);
