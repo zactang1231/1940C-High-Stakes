@@ -35,11 +35,11 @@ void redneg() {
 
     // First path
     chassis.moveToPose(-47, 23.5, 90, 4000);
-    chassis.follow(skillsauto1_txt, 15, 10000, {.forwards = false});
+    chassis.follow(redneg1_txt, 15, 10000, false);
     mogo.set_value(true);
     // Second path
     chassis.moveToPose(-35, 32, 270, 4000);
-    chassis.follow(skillsauto2_txt, 15, 10000);
+    chassis.follow(redneg2_txt, 15, 10000);
     // Rings
     chassis.moveToPose(-23, 47, 100, 4000, {.forwards = false});
     chassis.moveToPose(-10, 45, 100, 4000);
