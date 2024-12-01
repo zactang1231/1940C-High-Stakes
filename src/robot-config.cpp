@@ -301,55 +301,54 @@ void rejectRing() {
         int red = rgb.red;     // get red 
         int green = rgb.green; // get green 
         int blue = rgb.blue;   // get blue
+        pros::lcd::initialize();
+        pros::screen::print(TEXT_LARGE,0,"Red: %d", red);
+        pros::screen::print(TEXT_LARGE,1,"Green: %d", green);
+        pros::screen::print(TEXT_LARGE,2,"Blue: %d", blue);
 
         // Define thresholds for red and blue detection
-        const int RED_THRESHOLD = 150;
-        const int BLUE_THRESHOLD = 150;
+        const int RED_THRESHOLD = 1000;
+        const int BLUE_THRESHOLD = 1000;
 
         if (acceptColour == 'b') {
-            if (red > RED_THRESHOLD && green < 100 && blue < 100) {
+            if (red > RED_THRESHOLD && green < red && blue < red) {
+                uptake_mutex.take();
                 uptake.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
                 pros::delay(50);
                 uptake.move(0);
-                pros::delay(20);
-                uptake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-                uptake.move(127);
-                controller1.clear_line(1);
-                controller1.set_text(1,0, "bye bye red ring");
-                pros::delay(500);
-            }
-        }
-        else if (acceptColour == 'r') {
-            if (blue > BLUE_THRESHOLD && red < 100 && green < 100) {
-                uptake.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
                 pros::delay(50);
-                uptake.move(0);
-                pros::delay(20);
                 uptake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
                 uptake.move(127);
                 controller1.clear();
-                controller1.set_text(1,0, "bye bye blue ring");
+                controller1.print(0,0, "bye bye red ring");
+                pros::delay(500);
+                uptake_mutex.give();
             }
         }
-    }
-}
-
-void printRejectStatus() {
-    controller1.clear();
-    if (rejectingOn) {
-        controller1.print(1, 1, "Rejecting is ON.");
-    } else {
-        controller1.print(1, 1, "Rejecting is OFF.");
+        else if (acceptColour == 'r') {
+            if (blue > BLUE_THRESHOLD && red < blue && green < blue) {
+                uptake_mutex.take();
+                uptake.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+                pros::delay(50);
+                uptake.move(0);
+                pros::delay(50);
+                uptake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+                uptake.move(127);
+                controller1.clear();
+                controller1.print(0,0, "bye bye blue ring");
+                uptake_mutex.give();
+            }
+        }
     }
 }
 
 void rejectOnOff() {
     if (rejectingOn) {
         rejectingOn = false;
-        printRejectStatus();
+        // reject.set_led_pwm(0);
     } else {
         rejectingOn = true;
-        printRejectStatus();
+        // reject.set_led_pwm(100);
     }
 }
 

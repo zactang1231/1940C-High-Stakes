@@ -20,6 +20,7 @@
 #include <iostream>
 
 void opcontrolLoop(void* param) {
+    controller1.clear();
     leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
     rightMotors.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 
