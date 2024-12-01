@@ -34,7 +34,7 @@ void autonSkills() {
     handleLBStateUp();
     mogo.set_value(false);
 
-    chassis.setPose(-60, 0, 90, 4000);
+    chassis.setPose(-60, 0, 90);
 
     // --- Q1 --- //
 

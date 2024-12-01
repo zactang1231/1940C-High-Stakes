@@ -22,28 +22,24 @@
 // get a path used for pure pursuit
 // this needs to be put outside a function
 // '.' is replaced with "_" to make c++ happy
-ASSET(blueneg1_txt);
-ASSET(blueneg2_txt);
+ASSET(bluepos1_txt);
 
-void blueneg() {
+void bluepos() {
     preroller.move(127);
     uptake.move(127);
     handleLBStateUp();
     mogo.set_value(false);
 
-    chassis.setPose(50.5, 14.5, 90);
+    chassis.setPose(-61, -33, 90);
 
     // First path
-    chassis.moveToPose(47, 23.5, 90, 4000);
-    chassis.follow(blueneg1_txt, 15, 10000, false);
+    chassis.follow(bluepos1_txt, 15, 10000, false);
     mogo.set_value(true);
-    // Second path
-    chassis.moveToPose(35, 32, 270, 4000);
-    chassis.follow(blueneg2_txt, 15, 10000);
     // Rings
-    chassis.moveToPose(23, 47, 100, 4000, {.forwards = false});
-    chassis.moveToPose(10, 45, 100, 4000);
-    // Ladder
-    chassis.moveToPose(14, 9.5, 315, 4000, {.forwards = false});
-    handleLBStateDown();
+    chassis.moveToPose(23.5, -23.5, 180, 4000);
+    chassis.moveToPose(23.5, -47, 180, 4000);
+    // Mogo
+    chassis.moveToPose(13.6, -55, 270, 4000);
+    doinker.set_value(true);
+    chassis.moveToPose(35, -55, 270, 4000, {.forwards = false});
 }   
