@@ -68,7 +68,7 @@ pros::MotorGroup leftMotors({-11, -14, -16}, pros::MotorGearset::green); // left
 pros::MotorGroup rightMotors({12, 13, 5}, pros::MotorGearset::green); // right motor group - ports 12, 13, 5 (all reversed, so they're negative)
 
 // motors - migrated from robot-config.cpp from states code
-pros::Motor preroller(-1, pros::MotorGearset::green);
+pros::Motor preroller(1, pros::MotorGearset::green);
 // pros::MotorGroup uptake({3,15}, pros::MotorGearset::green);
 pros::Motor uptake(15, pros::MotorGearset::green);
 pros::Motor lb(3, pros::MotorGearset::green);
@@ -84,7 +84,7 @@ pros::Optical reject(4);
 /* TRACKING WHEELS */
 
 // tracking wheels. we are using rotation sensors with 2" wheels
-pros::Rotation horizontalEnc(18);
+pros::Rotation horizontalEnc(-18);
 pros::Rotation verticalEnc(-6);
 lemlib::TrackingWheel horizontal(&horizontalEnc, lemlib::Omniwheel::NEW_2, horizontalOffset);
 lemlib::TrackingWheel vertical(&verticalEnc, lemlib::Omniwheel::NEW_2, verticalOffset);

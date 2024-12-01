@@ -22,6 +22,7 @@
 // get a path used for pure pursuit
 // this needs to be put outside a function
 // '.' is replaced with "_" to make c++ happy
+ASSET(skillsauto0_txt);
 ASSET(skillsauto1_txt);
 ASSET(skillsauto2_txt);
 ASSET(skillsauto3_txt);
@@ -29,27 +30,33 @@ ASSET(skillsauto4_txt);
 ASSET(skillsauto5_txt);
 
 void autonSkills() {
-    preroller.move(127);
-    uptake.move(127);
+    mogo.set_value(true);
+    preroller.move(-127);
     handleLBStateUp();
-    mogo.set_value(false);
+    // mogo.set_value(false);
 
     chassis.setPose(-60, 0, 90);
 
     // --- Q1 --- //
 
     // Go get mogo
-    chassis.moveToPose(-34, 17.5, 60, 4000,  {.forwards = false});
-    mogo.set_value(true);
+    chassis.moveToPoint(-47, 0, 10000);
+    chassis.turnToHeading(180, 10000);
+    chassis.moveToPoint(-47, 16, 10000,  {.forwards = false});
+    pros::delay(1000);
+    mogo.set_value(false);
     // First path
-    chassis.moveToPose(-47, 23.5, 90, 4000);
+    uptake.move(127);
+    chassis.moveToPoint(-47, 23.5, 10000);
+    chassis.turnToHeading(90, 10000);
+    // chassis.moveToPose(-47, 23.5, 90, 4000);
     chassis.follow(skillsauto1_txt, 15, 10000);
     // Second path
     chassis.moveToPose(0, 57, 220, 4000);
     chassis.follow(skillsauto2_txt, 15, 10000);
     // Q1 Rings
     chassis.moveToPose(-47, 47, 0, 4000, {.forwards = false});
-    chassis.moveToPose(-47, 59, 0, 4000);
+    chassis.moveToPose(-47, 61, 0, 4000);
     // Q1 mogo
     chassis.moveToPose(-47, 56, 0, 4000, {.forwards = false});
     chassis.moveToPose(-60, 60, 135, 4000, {.forwards = false});
@@ -66,7 +73,7 @@ void autonSkills() {
     chassis.follow(skillsauto3_txt, 15, 10000);
     // Second path
     chassis.moveToPose(0, -57, 320, 4000);
-    chassis.follow(skillsauto4_txt, 15, 10000);
+    chassis.follow(skillsauto4_txt, 20, 10000);
     // Q2 Rings
     chassis.moveToPose(-47, -47, 180, 4000, {.forwards = false});
     chassis.moveToPose(-47, -59, 0, 4000);
