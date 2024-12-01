@@ -31,18 +31,20 @@ ASSET(skillsauto5_txt);
 
 void autonSkills() {
     mogo.set_value(true);
+    uptake.move(127);
     preroller.move(-127);
     handleLBStateUp();
     // mogo.set_value(false);
 
     chassis.setPose(-60, 0, 90);
+    pros::delay(1000);
 
     // --- Q1 --- //
 
     // Go get mogo
     chassis.moveToPoint(-47, 0, 10000);
     chassis.turnToHeading(180, 10000);
-    chassis.moveToPoint(-47, 16, 10000,  {.forwards = false});
+    chassis.moveToPoint(-47, 17, 10000,  {.forwards = false});
     pros::delay(1000);
     mogo.set_value(false);
     // First path
@@ -53,14 +55,16 @@ void autonSkills() {
     chassis.follow(skillsauto1_txt, 15, 10000);
     // Second path
     chassis.moveToPose(0, 57, 220, 4000);
-    chassis.follow(skillsauto2_txt, 15, 10000);
+    chassis.follow(skillsauto2_txt, 13, 10000);
     // Q1 Rings
     chassis.moveToPose(-47, 47, 0, 4000, {.forwards = false});
-    chassis.moveToPose(-47, 61, 0, 4000);
+    chassis.moveToPose(-47, 65, 0, 4000);
     // Q1 mogo
     chassis.moveToPose(-47, 56, 0, 4000, {.forwards = false});
     chassis.moveToPose(-60, 60, 135, 4000, {.forwards = false});
     mogo.set_value(false);
+    chassis.moveToPose(-50, 50, 135, 4000);
+    chassis.moveToPose(-60, 60, 135, 4000, {.forwards = false});
 
 
     // --- Q2 --- //
