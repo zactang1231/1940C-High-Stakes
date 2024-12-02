@@ -46,13 +46,7 @@ void autocontrolLoop(void* param) {
     
     lb.tare_position();
 
-    // preroller.move(0);
-    // uptake.move(0);
-
-    // andy likes SPLIT ARCADE drive
-    // tank drive is too confusing :(
-
-    // this runs during tele-op the whole time
+    // this runs during auton the whole time
     while (true) {
         rejectRing();
         LBSpinToTarget();
