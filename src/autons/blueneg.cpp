@@ -36,15 +36,16 @@ void blueneg() {
     // First path
     chassis.moveToPose(56, 43.5, 240, 4000, {.forwards = false});
     chassis.moveToPose(33.5, 29.5, 240, 4000, {.forwards = false});
-    pros::delay(1500);
     // chassis.follow(blueneg1_txt, 15, 10000, false);
+    pros::delay(1500);
     mogo.set_value(false);
-    // Second path
-    chassis.moveToPose(35, 32, 270, 4000);
-    chassis.follow(blueneg2_txt, 15, 10000);
-    // Rings
-    chassis.moveToPose(23, 47, 100, 4000, {.forwards = false});
-    chassis.moveToPose(10, 45, 100, 4000);
+    // Ring
+    chassis.moveToPose(23.5, 47, 0, 4000);
+    // Quad stack
+    chassis.moveToPose(10, 49, 280, 4000);
+    chassis.moveToPose(23.5, 47, 280, 4000);
+    chassis.turnToHeading(260, 4000);
+    chassis.moveToPose(10, 44.5, 260, 4000);
     // Ladder
     chassis.moveToPose(14, 9.5, 315, 4000, {.forwards = false});
     handleLBStateDown();
