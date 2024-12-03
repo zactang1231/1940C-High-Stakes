@@ -30,16 +30,24 @@ void bluepos() {
     handleLBStateUp();
     mogo.set_value(false);
 
-    chassis.setPose(61, -33, 90);
+    chassis.setPose(61, -34, 270);
 
     // First path
-    chassis.follow(bluepos1_txt, 15, 10000, false);
+    // chassis.follow(bluepos1_txt, 15, 10000, false);
+    chassis.moveToPose(42, -34, 300, 4000);
+    chassis.turnToPoint(31.5, -28, 4000);
+    chassis.moveToPose(31.5, -28, 300, 4000);
+    pros::delay(1500);
     mogo.set_value(true);
-    // Rings
-    chassis.moveToPose(23.5, -23.5, 180, 4000);
+    // Ring
     chassis.moveToPose(23.5, -47, 180, 4000);
-    // Mogo
-    chassis.moveToPose(13.6, -55, 270, 4000);
+    // Rush Mogo
+    mogo.set_value(true);
+    chassis.turnToHeading(285, 4000);
+    chassis.moveToPose(15, -44.5, 285, 4000);
     doinker.set_value(true);
-    chassis.moveToPose(35, -55, 270, 4000, {.forwards = false});
+    chassis.moveToPose(34, -50.5, 285, 4000, {.forwards = false});
+    chassis.moveToPose(15, -44.5, 285, 4000, {.forwards = false});
+    pros::delay(1500);
+    mogo.set_value(false);
 }   
