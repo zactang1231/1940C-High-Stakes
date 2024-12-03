@@ -156,11 +156,11 @@ pros::Mutex uptake_mutex;
 // Preroller moves
 
 void prerollerForward() {
-    preroller.move(127);
+    preroller.move(-127);
 }
 
 void prerollerReverse() {
-    preroller.move(-127);
+    preroller.move(127);
 }
 
 void prerollerStop() {
