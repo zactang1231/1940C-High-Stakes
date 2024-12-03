@@ -29,21 +29,25 @@ void redneg() {
     preroller.move(127);
     uptake.move(127);
     handleLBStateUp();
-    mogo.set_value(false);
+    mogo.set_value(true);
 
-    chassis.setPose(-50.5, 14.5, 90, 4000);
+    chassis.setPose(56, 14.5, 90);
 
     // First path
-    chassis.moveToPose(-47, 23.5, 90, 4000);
-    chassis.follow(redneg1_txt, 15, 10000, false);
-    mogo.set_value(true);
-    // Second path
-    chassis.moveToPose(-35, 32, 270, 4000);
-    chassis.follow(redneg2_txt, 15, 10000);
-    // Rings
-    chassis.moveToPose(-23, 47, 100, 4000, {.forwards = false});
-    chassis.moveToPose(-10, 45, 100, 4000);
+    chassis.moveToPose(-56, 43.5, 120, 4000, {.forwards = false});
+    chassis.moveToPose(-33.5, 29.5, 120, 4000, {.forwards = false});
+    // chassis.follow(blueneg1_txt, 15, 10000, false);
+    pros::delay(1500);
+    mogo.set_value(false);
+    // Ring
+    chassis.moveToPose(-23.5, 47, 0, 4000);
+    // Quad stack
+    chassis.moveToPose(-10, 49, 80, 4000);
+    chassis.moveToPose(-23.5, 47, 80, 4000);
+    chassis.turnToHeading(100, 4000);
+    chassis.moveToPose(-10, 44.5, 100, 4000);
+    chassis.moveToPose(-23.5, 47, 100, 4000);
     // Ladder
-    chassis.moveToPose(-14, 9.5, 315, 4000, {.forwards = false});
+    chassis.moveToPose(-15, 14, 135, 4000, {.forwards = false});
     handleLBStateDown();
 }   
