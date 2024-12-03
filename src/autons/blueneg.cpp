@@ -46,7 +46,8 @@ void blueneg() {
     chassis.moveToPose(23.5, 47, 280, 4000);
     chassis.turnToHeading(260, 4000);
     chassis.moveToPose(10, 44.5, 260, 4000);
+    chassis.moveToPose(23.5, 47, 260, 4000);
     // Ladder
-    chassis.moveToPose(14, 9.5, 315, 4000, {.forwards = false});
+    chassis.moveToPose(15, 14, 225, 4000, {.forwards = false});
     handleLBStateDown();
 }   
