@@ -31,7 +31,7 @@ void blueneg() {
     handleLBStateUp();
     mogo.set_value(false);
 
-    chassis.setPose(50.5, 14.5, 90);
+    chassis.setPose(56, 14.5, 90);
 
     // First path
     chassis.moveToPose(47, 23.5, 90, 4000);
