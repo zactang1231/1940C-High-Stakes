@@ -38,6 +38,9 @@ void autonSkills() {
 
     chassis.setPose(-60, 0, 90);
     pros::delay(1000);
+    uptake.move(-127);
+    pros::delay(500);
+    uptake.move(127);
 
     // --- Q1 --- //
 
@@ -45,24 +48,23 @@ void autonSkills() {
     chassis.moveToPoint(-47, 0, 10000);
     chassis.turnToHeading(180, 10000);
     chassis.moveToPoint(-47, 17, 10000,  {.forwards = false});
-    pros::delay(1000);
+    pros::delay(1500);
     mogo.set_value(false);
     // First path
     uptake.move(127);
-    chassis.moveToPoint(-47, 23.5, 10000);
-    chassis.turnToHeading(90, 10000);
-    // chassis.moveToPose(-47, 23.5, 90, 4000);
+    chassis.moveToPose(-47, 23.5, 90, 4000);
     chassis.follow(skillsauto1_txt, 15, 10000);
-    // Second path
-    chassis.moveToPose(0, 57, 220, 4000);
-    chassis.follow(skillsauto2_txt, 13, 10000);
-    // Q1 Rings
+    // Q1 Line
+    chassis.moveToPose(0, 50, 270, 4000);
+    chassis.moveToPose(61, 50, 270, 4000);
+    // Q1 L-Ring
     chassis.moveToPose(-47, 47, 0, 4000, {.forwards = false});
     chassis.moveToPose(-47, 65, 0, 4000);
     // Q1 mogo
     chassis.moveToPose(-47, 56, 0, 4000, {.forwards = false});
     chassis.moveToPose(-60, 60, 135, 4000, {.forwards = false});
-    mogo.set_value(false);
+    pros::delay(4000);
+    mogo.set_value(true);
     chassis.moveToPose(-50, 50, 135, 4000);
     chassis.moveToPose(-60, 60, 135, 4000, {.forwards = false});
 
@@ -70,21 +72,28 @@ void autonSkills() {
     // --- Q2 --- //
 
     // Go get mogo
-    chassis.moveToPose(-37, -17.5, 240, 4000,  {.forwards = false});
-    mogo.set_value(true);
-    // First path
-    chassis.moveToPose(-47, -23.5, 90, 4000);
-    chassis.follow(skillsauto3_txt, 15, 10000);
-    // Second path
-    chassis.moveToPose(0, -57, 320, 4000);
-    chassis.follow(skillsauto4_txt, 20, 10000);
-    // Q2 Rings
-    chassis.moveToPose(-47, -47, 180, 4000, {.forwards = false});
-    chassis.moveToPose(-47, -59, 0, 4000);
-    // Q2 mogo
-    chassis.moveToPose(-47, -56, 0, 4000, {.forwards = false});
-    chassis.moveToPose(-60, -60, 135, 4000, {.forwards = false});
+    chassis.moveToPoint(-47, 0, 10000);
+    chassis.turnToHeading(0, 10000);
+    chassis.moveToPoint(-47, -17, 10000,  {.forwards = false});
+    pros::delay(1500);
     mogo.set_value(false);
+    // First path
+    uptake.move(127);
+    chassis.moveToPose(-47, -23.5, 90, 4000);
+    chassis.follow(skillsauto1_txt, 15, 10000);
+    // Q1 Line
+    chassis.moveToPose(0, -50, 270, 4000);
+    chassis.moveToPose(61, -50, 270, 4000);
+    // Q1 L-Ring
+    chassis.moveToPose(-47, -47, 0, 4000, {.forwards = false});
+    chassis.moveToPose(-47, -65, 0, 4000);
+    // Q1 mogo
+    chassis.moveToPose(-47, -56, 0, 4000, {.forwards = false});
+    chassis.moveToPose(-60, -60, 45, 4000, {.forwards = false});
+    pros::delay(4000);
+    mogo.set_value(true);
+    chassis.moveToPose(-50, -50, 45, 4000);
+    chassis.moveToPose(-60, -60, 45, 4000, {.forwards = false});
 
     // --- Q3 --- //
 
