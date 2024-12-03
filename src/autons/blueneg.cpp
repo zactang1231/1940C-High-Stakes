@@ -29,14 +29,16 @@ void blueneg() {
     preroller.move(127);
     uptake.move(127);
     handleLBStateUp();
-    mogo.set_value(false);
+    mogo.set_value(true);
 
     chassis.setPose(56, 14.5, 90);
 
     // First path
-    chassis.moveToPose(47, 23.5, 90, 4000);
-    chassis.follow(blueneg1_txt, 15, 10000, false);
-    mogo.set_value(true);
+    chassis.moveToPose(56, 43.5, 240, 4000, {.forwards = false});
+    chassis.moveToPose(33.5, 29.5, 240, 4000, {.forwards = false});
+    pros::delay(1500);
+    // chassis.follow(blueneg1_txt, 15, 10000, false);
+    mogo.set_value(false);
     // Second path
     chassis.moveToPose(35, 32, 270, 4000);
     chassis.follow(blueneg2_txt, 15, 10000);
