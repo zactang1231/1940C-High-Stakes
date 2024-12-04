@@ -25,29 +25,62 @@
 ASSET(bluepos1_txt);
 
 void bluepos() {
+    // --- RUSH --- //
+
+    // Ring starts in LB
+
     preroller.move(127);
     uptake.move(127);
     handleLBStateUp();
-    mogo.set_value(false);
+    // mogo.set_value(false);
 
-    chassis.setPose(61, -34, 270);
+    chassis.setPose(61, -47, 270);
+    // Ring line (async, timed)
+    chassis.moveToPose(23.5, -47, 270, 4000, {}, true);
+    pros::delay(1000);
+    uptake.move(0);
 
-    // First path
-    // chassis.follow(bluepos1_txt, 15, 10000, false);
-    chassis.moveToPose(42, -34, 300, 4000);
-    chassis.turnToPoint(31.5, -28, 4000);
-    chassis.moveToPose(31.5, -28, 300, 4000);
-    pros::delay(1500);
-    mogo.set_value(true);
-    // Ring
-    chassis.moveToPose(23.5, -47, 180, 4000);
-    // Rush Mogo
-    mogo.set_value(true);
-    chassis.turnToHeading(285, 4000);
-    chassis.moveToPose(15, -44.5, 285, 4000);
+    chassis.moveToPose(18, -45.5, 285, 4000);
     doinker.set_value(true);
-    chassis.moveToPose(34, -50.5, 285, 4000, {.forwards = false});
+    chassis.moveToPose(34, -50, 285, 4000, {.forwards = false, .maxSpeed = 25});
+    doinker.set_value(false);
     chassis.moveToPose(15, -44.5, 285, 4000, {.forwards = false});
     pros::delay(1500);
     mogo.set_value(false);
+    uptake.move(127);
+    pros::delay(2000);
+    mogo.set_value(true);
+    chassis.moveToPoint(23.5, -47, 4000);
+    chassis.turnToHeading(180, 4000);
+    chassis.moveToPose(23.5, -34, 0, 4000, {.forwards = false});
+    pros::delay(1500);
+    mogo.set_value(false);
+
+    // --- NON RUSH --- //
+
+    // preroller.move(127);
+    // uptake.move(127);
+    // handleLBStateUp();
+    // mogo.set_value(false);
+
+    // chassis.setPose(61, -34, 270);
+
+    // // First path
+    // // chassis.follow(bluepos1_txt, 15, 10000, false);
+    // chassis.moveToPose(42, -34, 300, 4000);
+    // chassis.turnToPoint(31.5, -28, 4000);
+    // chassis.moveToPose(31.5, -28, 300, 4000);
+    // pros::delay(1500);
+    // mogo.set_value(true);
+    // // Ring
+    // chassis.moveToPose(23.5, -47, 180, 4000);
+    // // Rush Mogo
+    // mogo.set_value(true);
+    // chassis.turnToHeading(285, 4000);
+    // chassis.moveToPose(15, -44.5, 285, 4000);
+    // doinker.set_value(true);
+    // chassis.moveToPose(34, -50.5, 285, 4000, {.forwards = false});
+    // chassis.moveToPose(15, -44.5, 285, 4000, {.forwards = false});
+    // pros::delay(1500);
+    // mogo.set_value(false);
 }   
