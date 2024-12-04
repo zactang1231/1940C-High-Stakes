@@ -27,22 +27,23 @@ ASSET(redneg2_txt);
 
 void redneg() {
     preroller.move(127);
-    uptake.move(127);
+    uptake.move(0);
     handleLBStateUp();
     mogo.set_value(true);
 
-    chassis.setPose(56, 14.5, 90);
+    chassis.setPose(-56, 14.5, 0);
 
     // First path
-    chassis.moveToPose(-56, 43.5, 120, 4000, {.forwards = false});
-    chassis.moveToPose(-33.5, 29.5, 120, 4000, {.forwards = false});
+    chassis.moveToPose(-56, 43.5, 0, 4000);
+    chassis.moveToPose(-23.5, 23.5, 120, 4000, {.forwards = false, .maxSpeed = 50});
     // chassis.follow(blueneg1_txt, 15, 10000, false);
-    pros::delay(1500);
+    pros::delay(2000);
     mogo.set_value(false);
     // Ring
     chassis.moveToPose(-23.5, 47, 0, 4000);
+    uptake.move(127);
     // Quad stack
-    chassis.moveToPose(-10, 49, 80, 4000);
+    chassis.moveToPose(-10, 49, 80, 4000, {.forwards = false});
     chassis.moveToPose(-23.5, 47, 80, 4000);
     chassis.turnToHeading(100, 4000);
     chassis.moveToPose(-10, 44.5, 100, 4000);
