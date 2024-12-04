@@ -50,11 +50,14 @@ void bluepos() {
     uptake.move(127);
     pros::delay(2000);
     mogo.set_value(true);
+    handleLBStateDown();
+    uptake.move_relative(-200, 127);
     chassis.moveToPoint(23.5, -47, 4000);
     chassis.turnToHeading(180, 4000);
     chassis.moveToPose(23.5, -34, 0, 4000, {.forwards = false});
     pros::delay(1500);
     mogo.set_value(false);
+    uptake.move(127);
 
     // --- NON RUSH --- //
 
