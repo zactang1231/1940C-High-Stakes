@@ -14,6 +14,7 @@
 #include "opcontrol.h"
 #include "autocontrol.h"
 #include "auton-skills.h"
+#include "redpos.h"
 
 /**pros c fetch <template>
  * Runs initialization code. This occurs as soon as the program is started.
@@ -72,7 +73,8 @@ void autonomous() {
     chassis.setPose(0,0,0);
     autocontrolInit();
 
-    autonSkills();
+    redpos();
+    // autonSkills();
 
     // chassis.moveToPoint(0, 24, 100000);
     // chassis.turnToHeading(270, 100000);
