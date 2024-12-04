@@ -43,8 +43,10 @@ void opcontrolLoop(void* param) {
     lb.set_brake_mode (pros::E_MOTOR_BRAKE_HOLD);
 
     reject.set_led_pwm(100);
-    
-    lb.tare_position();
+
+    handleLBStateDown();
+    handleLBStateDown();
+    handleLBStateUp();
 
     // andy likes SPLIT ARCADE drive
     // tank drive is too confusing :(

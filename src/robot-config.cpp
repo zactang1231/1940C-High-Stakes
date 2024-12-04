@@ -85,7 +85,7 @@ pros::Optical reject(4);
 
 // tracking wheels. we are using rotation sensors with 2" wheels
 pros::Rotation horizontalEnc(-18);
-pros::Rotation verticalEnc(-6);
+pros::Rotation verticalEnc(-8);
 lemlib::TrackingWheel horizontal(&horizontalEnc, lemlib::Omniwheel::NEW_2, horizontalOffset);
 lemlib::TrackingWheel vertical(&verticalEnc, lemlib::Omniwheel::NEW_2, verticalOffset);
 
@@ -302,9 +302,9 @@ void rejectRing() {
         int green = rgb.green; // get green 
         int blue = rgb.blue;   // get blue
         pros::lcd::initialize();
-        pros::screen::print(TEXT_LARGE,0,"Red: %d", red);
-        pros::screen::print(TEXT_LARGE,1,"Green: %d", green);
-        pros::screen::print(TEXT_LARGE,2,"Blue: %d", blue);
+        // pros::screen::print(TEXT_LARGE,0,"Red: %d", red);
+        // pros::screen::print(TEXT_LARGE,1,"Green: %d", green);
+        // pros::screen::print(TEXT_LARGE,2,"Blue: %d", blue);
 
         // Define thresholds for red and blue detection
         const int RED_THRESHOLD = 1000;

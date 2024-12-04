@@ -41,10 +41,10 @@ void initialize() {
     pros::Task screenTask([&]() {
         while (true) {
             // print robot location to the brain screen
-            // pros::screen::print(TEXT_MEDIUM, 0, "Yay! Init is done, thanks for waiting.");
-            // pros::screen::print(TEXT_MEDIUM, 1, "X: %f", chassis.getPose().x); // x
-            // pros::screen::print(TEXT_MEDIUM, 2, "Y: %f", chassis.getPose().y); // y
-            // pros::screen::print(TEXT_MEDIUM, 3, "Theta: %f", chassis.getPose().theta); // heading
+            pros::screen::print(TEXT_MEDIUM, 0, "Yay! Init is done, thanks for waiting.");
+            pros::screen::print(TEXT_MEDIUM, 1, "X: %f", chassis.getPose().x); // x
+            pros::screen::print(TEXT_MEDIUM, 2, "Y: %f", chassis.getPose().y); // y
+            pros::screen::print(TEXT_MEDIUM, 3, "Theta: %f", chassis.getPose().theta); // heading
             // log position telemetry
             lemlib::telemetrySink()->info("Chassis pose: {}", chassis.getPose());
             // delay to save resources
@@ -74,9 +74,9 @@ void autonomous() {
     chassis.setPose(0,0,0);
     autocontrolInit();
 
-    // redpos();
+    redpos();
     // bluepos();
-    autonSkills();
+    // autonSkills();
 
     // chassis.moveToPoint(0, 24, 100000);
     // chassis.turnToHeading(270, 100000);

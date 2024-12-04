@@ -37,19 +37,26 @@ void redpos() {
 
     chassis.setPose(-61, -47, 90);
     // Ring line
-    chassis.moveToPose(-23.5, -47, 90, 4000);
-    // chassis.moveToPose(-37.5, -47, 90, 4000, {});
-
-    chassis.moveToPose(-18, -45.5, 75, 4000);
-    doinker.set_value(true);
-    chassis.moveToPose(-34, -50, 75, 4000, {.forwards = false, .maxSpeed = 25});
-    doinker.set_value(false);
-    chassis.moveToPose(-15, -44.5, 75, 4000, {.forwards = false});
+    chassis.moveToPose(-47, -47, 90, 4000);
     pros::delay(1500);
-    mogo.set_value(false);
+    chassis.moveToPose(-23.5, -47, 90, 4000);
+    pros::delay(1300);
+    uptake.move(0);
+    preroller.move(0);
+
+    chassis.moveToPose(-9, -52, 90, 4000);
+    pros::delay(2000);
+    doinker.set_value(true);
+    chassis.moveToPose(-34, -50, 80, 4000, {.forwards = false, .maxSpeed = 35});
+    pros::delay(2000);
+    doinker.set_value(false);
+    // chassis.moveToPose(-15, -44.5, 75, 4000, {.forwards = false});
+    chassis.moveToPose(-10, -52, 80, 4000, {.forwards = false});
+    pros::delay(1500);
+    mogo.set_value(true);
     uptake.move(127);
     pros::delay(2000);
-    mogo.set_value(true);
+    mogo.set_value(false);
     handleLBStateDown();
     uptake.move_relative(-200, 127);
     chassis.moveToPoint(-23.5, -47, 4000);
