@@ -30,35 +30,21 @@ void bluepos() {
     // Ring starts in LB
 
     preroller.move(127);
-    uptake.move(127);
     handleLBStateUp();
-    // mogo.set_value(false);
 
-    chassis.setPose(61, -47, 270);
-    // Ring line (async, timed)
-    chassis.moveToPose(23.5, -47, 270, 4000, {}, true);
+    chassis.setPose(61, -33, 270);
+    // Mogo
+    chassis.moveToPose(43, -33, 295, 4000);
     pros::delay(1000);
     uptake.move(0);
 
-    chassis.moveToPose(18, -45.5, 285, 4000);
-    doinker.set_value(true);
-    chassis.moveToPose(34, -50, 285, 4000, {.forwards = false, .maxSpeed = 25});
-    doinker.set_value(false);
-    chassis.moveToPose(15, -44.5, 285, 4000, {.forwards = false});
-    pros::delay(1500);
-    mogo.set_value(false);
-    uptake.move(127);
-    pros::delay(2000);
-    mogo.set_value(true);
-    handleLBStateDown();
-    uptake.move_relative(-200, 127);
-    chassis.moveToPoint(23.5, -47, 4000);
-    chassis.turnToHeading(180, 4000);
-    chassis.moveToPose(23.5, -34, 0, 4000, {.forwards = false});
-    pros::delay(1500);
-    mogo.set_value(false);
-    uptake.move(127);
-
+    chassis.moveToPose(23.5, -23.5, 295, 4000);
+    chassis.turnToPoint(23.5, -23.5, 2000);
+    chassis.moveToPose(23.5, -47, 180, 4000);
+    chassis.turnToPoint(56, -47, 2000);
+    chassis.moveToPose(56, -47, 90, 4000);
+    chassis.turnToPoint(58, -55, 2000);
+    chassis.moveToPose(58, -55, 165, 4000);
     // --- NON RUSH --- //
 
     // preroller.move(127);

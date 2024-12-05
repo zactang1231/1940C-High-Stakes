@@ -27,24 +27,27 @@ ASSET(blueneg2_txt);
 
 void blueneg() {
     preroller.move(127);
-    uptake.move(127);
+    uptake_mutex.take();
+    uptake.move(0);
+    uptake_mutex.give();
     handleLBStateUp();
     mogo.set_value(true);
 
-    chassis.setPose(56, 14.5, 90);
+    chassis.setPose(56, 14.5, 0);
 
     // First path
-    chassis.moveToPose(56, 43.5, 240, 4000, {.forwards = false});
-    chassis.moveToPose(33.5, 29.5, 240, 4000, {.forwards = false});
+    chassis.moveToPose(56, 43.5, 0, 4000);
+    chassis.moveToPose(23.5, 23.5, 240, 4000, {.forwards = false, .maxSpeed = 50});
     // chassis.follow(blueneg1_txt, 15, 10000, false);
-    pros::delay(1500);
+    pros::delay(2000);
     mogo.set_value(false);
     // Ring
-    chassis.moveToPose(23.5, 47, 0, 4000);
+    chassis.moveToPose(23.5, 47, 0, 4000, {.maxSpeed = 127});
+    uptake.move(127);
     // Quad stack
     chassis.moveToPose(10, 49, 280, 4000);
-    chassis.moveToPose(23.5, 47, 280, 4000);
-    chassis.turnToHeading(260, 4000);
+    chassis.moveToPose(23.5, 47, 280, 4000, {.forwards = false});
+    chassis.turnToHeading(100, 4000);
     chassis.moveToPose(10, 44.5, 260, 4000);
     chassis.moveToPose(23.5, 47, 260, 4000);
     // Ladder

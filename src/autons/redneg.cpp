@@ -29,7 +29,6 @@ void redneg() {
     preroller.move(127);
     uptake_mutex.take();
     uptake.move(0);
-    uptake_mutex.give();
     handleLBStateUp();
     mogo.set_value(true);
 
@@ -53,4 +52,5 @@ void redneg() {
     // Ladder
     chassis.moveToPose(-15, 14, 135, 4000, {.forwards = false});
     handleLBStateDown();
+    uptake_mutex.give();
 }   

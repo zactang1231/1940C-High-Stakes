@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "no skill",
+    "project_name": "hehehhoooooo",
     "target": "v5",
     "templates": {
       "kernel": {
@@ -80,7 +80,7 @@
     },
     "upload_options": {
       "description": "please work mate",
-      "slot": 3,
+      "slot": 1,
       "icon": "pizza"
     },
     "use_early_access": false

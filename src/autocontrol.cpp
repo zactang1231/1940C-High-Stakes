@@ -35,7 +35,7 @@ void autocontrolLoop(void* param) {
     // rightMotors.move_velocity(200);
 
     preroller.move_velocity(200);
-    uptake.move_velocity(200);
+    // uptake.move_velocity(200);
     
     preroller.set_brake_mode (pros::E_MOTOR_BRAKE_COAST);
     uptake.set_brake_mode (pros::E_MOTOR_BRAKE_COAST);
