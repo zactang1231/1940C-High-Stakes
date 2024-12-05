@@ -27,7 +27,9 @@ ASSET(redneg2_txt);
 
 void redneg() {
     preroller.move(127);
+    uptake_mutex.take();
     uptake.move(0);
+    uptake_mutex.give();
     handleLBStateUp();
     mogo.set_value(true);
 
@@ -40,11 +42,11 @@ void redneg() {
     pros::delay(2000);
     mogo.set_value(false);
     // Ring
-    chassis.moveToPose(-23.5, 47, 0, 4000);
+    chassis.moveToPose(-23.5, 47, 0, 4000, {.maxSpeed = 127});
     uptake.move(127);
     // Quad stack
-    chassis.moveToPose(-10, 49, 80, 4000, {.forwards = false});
-    chassis.moveToPose(-23.5, 47, 80, 4000);
+    chassis.moveToPose(-10, 49, 80, 4000);
+    chassis.moveToPose(-23.5, 47, 80, 4000, {.forwards = false});
     chassis.turnToHeading(100, 4000);
     chassis.moveToPose(-10, 44.5, 100, 4000);
     chassis.moveToPose(-23.5, 47, 100, 4000);

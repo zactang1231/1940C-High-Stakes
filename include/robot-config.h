@@ -59,6 +59,8 @@ extern void prerollerForward();
 extern void prerollerReverse();
 extern void prerollerStop();
 
+extern pros::Mutex uptake_mutex;
+
 extern void uptakeForward();
 extern void uptakeReverse();
 extern void handleUptakeState();

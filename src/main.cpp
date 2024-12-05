@@ -78,9 +78,9 @@ void autonomous() {
 
     // redpos();
     // blueneg();
-    redneg();
+    // redneg();
     // bluepos();
-    // autonSkills();
+    autonSkills();
 
     // chassis.moveToPoint(0, 24, 100000);
     // chassis.turnToHeading(270, 100000);

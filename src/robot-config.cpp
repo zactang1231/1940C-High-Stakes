@@ -314,7 +314,7 @@ void rejectRing() {
             if (red > RED_THRESHOLD && green < red && blue < red) {
                 uptake_mutex.take();
                 uptake.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-                pros::delay(30);
+                pros::delay(25);
                 uptake.move(0);
                 pros::delay(1000);
                 uptake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
@@ -329,7 +329,7 @@ void rejectRing() {
             if (blue > BLUE_THRESHOLD && red < blue && green < blue) {
                 uptake_mutex.take();
                 uptake.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-                pros::delay(30);
+                pros::delay(25);
                 uptake.move(0);
                 pros::delay(1000);
                 uptake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);

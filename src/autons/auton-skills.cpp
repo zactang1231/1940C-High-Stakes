@@ -30,24 +30,19 @@ ASSET(skillsauto4_txt);
 ASSET(skillsauto5_txt);
 
 void autonSkills() {
+    uptake_mutex.take();
     mogo.set_value(true);
-    uptake.move(127);
-    preroller.move(-127);
-    handleLBStateUp();
     // mogo.set_value(false);
 
     chassis.setPose(-60, 0, 90);
-    pros::delay(1000);
-    uptake.move(-127);
-    pros::delay(500);
-    uptake.move(127);
 
     // --- Q1 --- //
 
     // Go get mogo
-    chassis.moveToPoint(-47, 0, 10000);
-    chassis.turnToHeading(180, 10000);
-    chassis.moveToPoint(-47, 17, 10000,  {.forwards = false});
+    chassis.moveToPoint(-47, 0, 4000);
+    chassis.turnToHeading(180, 4000);
+    chassis.moveToPoint(-47, 17, 4000,  {.forwards = false});
+    preroller.move(127);
     pros::delay(1500);
     mogo.set_value(false);
     // First path
@@ -56,7 +51,7 @@ void autonSkills() {
     chassis.follow(skillsauto1_txt, 15, 10000);
     // Q1 Line
     chassis.moveToPose(0, 50, 270, 4000);
-    chassis.moveToPose(61, 50, 270, 4000);
+    chassis.moveToPose(-61, 50, 270, 4000);
     // Q1 L-Ring
     chassis.moveToPose(-47, 47, 0, 4000, {.forwards = false});
     chassis.moveToPose(-47, 65, 0, 4000);
@@ -72,18 +67,19 @@ void autonSkills() {
     // --- Q2 --- //
 
     // Go get mogo
-    chassis.moveToPoint(-47, 0, 10000);
-    chassis.turnToHeading(0, 10000);
-    chassis.moveToPoint(-47, -17, 10000,  {.forwards = false});
+    chassis.moveToPoint(-47, 0, 4000);
+    chassis.turnToHeading(180, 4000);
+    chassis.moveToPoint(-47, -17, 4000,  {.forwards = false});
+    preroller.move(127);
     pros::delay(1500);
     mogo.set_value(false);
     // First path
     uptake.move(127);
     chassis.moveToPose(-47, -23.5, 90, 4000);
-    chassis.follow(skillsauto1_txt, 15, 10000);
+    chassis.follow(skillsauto3_txt, 15, 10000);
     // Q1 Line
     chassis.moveToPose(0, -50, 270, 4000);
-    chassis.moveToPose(61, -50, 270, 4000);
+    chassis.moveToPose(-61, -50, 270, 4000);
     // Q1 L-Ring
     chassis.moveToPose(-47, -47, 0, 4000, {.forwards = false});
     chassis.moveToPose(-47, -65, 0, 4000);
@@ -129,4 +125,5 @@ void autonSkills() {
     mogo.set_value(false);
 
     chassis.moveToPoint(42, 42, 4000);
+    uptake_mutex.give();
 }   
