@@ -43,10 +43,10 @@ void initialize() {
     pros::Task screenTask([&]() {
         while (true) {
             // print robot location to the brain screen
-            // pros::screen::print(TEXT_MEDIUM, 0, "Yay! Init is done, thanks for waiting.");
-            // pros::screen::print(TEXT_MEDIUM, 1, "X: %f", chassis.getPose().x); // x
-            // pros::screen::print(TEXT_MEDIUM, 2, "Y: %f", chassis.getPose().y); // y
-            // pros::screen::print(TEXT_MEDIUM, 3, "Theta: %f", chassis.getPose().theta); // heading
+            pros::screen::print(TEXT_MEDIUM, 0, "Yay! Init is done, thanks for waiting.");
+            pros::screen::print(TEXT_MEDIUM, 1, "X: %f", chassis.getPose().x); // x
+            pros::screen::print(TEXT_MEDIUM, 2, "Y: %f", chassis.getPose().y); // y
+            pros::screen::print(TEXT_MEDIUM, 3, "Theta: %f", chassis.getPose().theta); // heading
             // log position telemetry
             lemlib::telemetrySink()->info("Chassis pose: {}", chassis.getPose());
             // delay to save resources
@@ -69,18 +69,18 @@ void competition_initialize() {}
  * Runs during auto
  */
 void autonomous() {
-    leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-    rightMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    // leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    // rightMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
-    setAllianceColour('r');
+    setAllianceColour('b');
     chassis.setPose(0,0,0);
     autocontrolInit();
 
     // redpos();
     // blueneg();
     // redneg();
-    // bluepos();
-    autonSkills();
+    bluepos();
+    // autonSkills();
 
     // chassis.moveToPoint(0, 24, 100000);
     // chassis.turnToHeading(270, 100000);
@@ -93,6 +93,6 @@ void opcontrol() {
     leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
     leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 
-    setAllianceColour('r');
+    setAllianceColour('b');
     opcontrolInit();
 }

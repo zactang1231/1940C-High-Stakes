@@ -109,7 +109,7 @@ lemlib::ControllerSettings linearController(7, // proportional gain (kP)
                                             100, // small error range timeout, in milliseconds
                                             3, // large error range, in inches
                                             500, // large error range timeout, in milliseconds
-                                            40 // maximum acceleration (slew)
+                                            35 // maximum acceleration (slew)
 );
 
 // 7, 0, 20
@@ -345,10 +345,10 @@ void rejectRing() {
 void rejectOnOff() {
     if (rejectingOn) {
         rejectingOn = false;
-        // reject.set_led_pwm(0);
+        reject.set_led_pwm(0);
     } else {
         rejectingOn = true;
-        // reject.set_led_pwm(100);
+        reject.set_led_pwm(100);
     }
 }
 
@@ -439,6 +439,6 @@ void opcontrolInit() {
     pros::Task lbLoopTask(LBSpinToTarget);
 }
 
-void autocontrolInit() {
+void autocontrolInit() { 
     pros::Task autocontrolLoopTask(autocontrolLoop);
 }

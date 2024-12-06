@@ -25,26 +25,91 @@
 ASSET(bluepos1_txt);
 
 void bluepos() {
+    // chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
+    chassis.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
     // --- RUSH --- //
 
     // Ring starts in LB
 
     preroller.move(127);
-    handleLBStateUp();
 
-    chassis.setPose(61, -33, 270);
+    // Set initial pose, invert x and adjust theta
+    chassis.setPose(0, 0, 152.8);  // Assuming angles are in degrees
+
+    mogo.set_value(true);
+
+    // Move to mirrored pose
+    chassis.moveToPose(-12.5, 26.4, 152.8, 1800, {.forwards=false, .lead=0, .maxSpeed = 105, .minSpeed = 15}, true);
+
+    pros::delay(700);
+
+    mogo.set_value(false); // camp doww
+
+    // Turn to mirrored heading
+    chassis.turnToHeading(223.64, 1800);  // Mirror angle
+
+    uptake.move(127);
+
+    chassis.moveToPose(-22.5, 13.62, 223.64, 1800, {.forwards=true, .lead=0, .maxSpeed = 110, .minSpeed = 15}, true);
+
+    pros::delay(700);
+
+    chassis.turnToHeading(0, 2000);
+
+    chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
+
+    // // Move to another mirrored pose
+    // chassis.moveToPose(4.4, 26.4, 270, 2500, {.forwards=true, .lead=0, .maxSpeed = 115, .minSpeed = 15}, false);
+
+    // pros::delay(1000);
+
+    // chassis.turnToHeading(270, 2500);
+
+    // // chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
+    // chassis.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
+
+
+
+
+    // // --- RUSH --- //
+
+    // // Ring starts in LB
+
+    // preroller.move(127);
+
+    // chassis.setPose(0, 0, 152.8);
+
+    // mogo.set_value(true);
+
+    // chassis.moveToPose(-12.5, 26.4, 152.8, 1800, {.forwards=false, .lead=0, .maxSpeed = 105, .minSpeed = 15}, false);
+
+    // mogo.set_value(false); // camp doww
+
+    // pros::delay(300);
+
+    // uptake.move(127);
+
+    // chassis.turnToHeading(90, 1800);
+
+    // chassis.moveToPose(4.4, 26.4, 94.08, 2500, {.forwards=true, .lead=0, .maxSpeed = 115, .minSpeed = 15}, false);
+
+    // pros::delay(1000);
+
+    // chassis.turnToHeading(0, 2500);
+
+    //152.8
     // Mogo
-    chassis.moveToPose(43, -33, 295, 4000);
-    pros::delay(1000);
-    uptake.move(0);
+    // chassis.moveToPose(43, -33, 295, 4000);
+    // pros::delay(1000);
+    // uptake.move(0);
 
-    chassis.moveToPose(23.5, -23.5, 295, 4000);
-    chassis.turnToPoint(23.5, -23.5, 2000);
-    chassis.moveToPose(23.5, -47, 180, 4000);
-    chassis.turnToPoint(56, -47, 2000);
-    chassis.moveToPose(56, -47, 90, 4000);
-    chassis.turnToPoint(58, -55, 2000);
-    chassis.moveToPose(58, -55, 165, 4000);
+    // chassis.moveToPose(23.5, -23.5, 295, 4000);
+    // chassis.turnToPoint(23.5, -23.5, 2000);
+    // chassis.moveToPose(23.5, -47, 180, 4000);
+    // chassis.turnToPoint(56, -47, 2000);
+    // chassis.moveToPose(56, -47, 90, 4000);
+    // chassis.turnToPoint(58, -55, 2000);
+    // chassis.moveToPose(58, -55, 165, 4000);
     // --- NON RUSH --- //
 
     // preroller.move(127);

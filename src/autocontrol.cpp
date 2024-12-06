@@ -20,8 +20,8 @@
 #include <iostream>
 
 void autocontrolLoop(void* param) {
-    leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-    rightMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    // leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    // rightMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
     leftMotors.set_current_limit(2500);
     rightMotors.set_current_limit(2500);

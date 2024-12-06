@@ -40,11 +40,12 @@ void autonSkills() {
 
     // Go get mogo
     chassis.moveToPoint(-47, 0, 2000);
-    chassis.turnToPoint(-47, 23.5, 2000, {.forwards = false});
+    chassis.turnToPoint(-47, 25, 2000, {.forwards = false});
     chassis.moveToPoint(-47, 17, 2500,  {.forwards = false});
     preroller.move(127);
-    pros::delay(1900);
+    pros::delay(2000);
     mogo.set_value(false);
+    pros::delay(500);
     // First path
     uptake.move(127);
     chassis.moveToPose(-47, 23.5, 90, 2000);
@@ -65,16 +66,18 @@ void autonSkills() {
     // --- Q2 --- //
 
     // Go get mogo
-    chassis.moveToPoint(-47, 0, 4000);
-    chassis.turnToPoint(-47, -23.5, 2000, {.forwards = false});
+    chassis.moveToPose(-45, 47, 0, 4000, {.forwards = false});
+    chassis.moveToPoint(-45, 0, 4000, {.forwards = false});
+    chassis.turnToPoint(-45, -25, 4000, {.forwards = false});
     chassis.turnToHeading(0, 4000);
-    chassis.moveToPoint(-47, -17, 4000,  {.forwards = false});
+    chassis.moveToPoint(-45, -17, 4000,  {.forwards = false});
     preroller.move(127);
-    pros::delay(1900);
+    pros::delay(2000);
     mogo.set_value(false);
+    pros::delay(500);
     // First path
     uptake.move(127);
-    chassis.moveToPose(-47, -23.5, 90, 2000);
+    chassis.moveToPose(-47, -23.5, 90, 3000);
     chassis.follow(skillsauto3_txt, 15, 10000);
     // Q1 Line
     chassis.moveToPose(0, -50, 270, 2000);

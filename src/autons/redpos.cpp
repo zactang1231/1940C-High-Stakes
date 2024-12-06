@@ -26,45 +26,40 @@ ASSET(redpos1_txt);
 
 void redpos() {
 
+    // chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
+    chassis.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
     // --- RUSH --- //
 
     // Ring starts in LB
 
     preroller.move(127);
-    uptake.move(127);
-    handleLBStateUp();
-    // mogo.set_value(false);
 
-    chassis.setPose(-61, -47, 90);
-    // Ring line
-    chassis.moveToPose(-47, -47, 90, 4000);
-    pros::delay(1500);
-    chassis.moveToPose(-23.5, -47, 90, 4000);
-    pros::delay(1300);
-    uptake.move(0);
-    preroller.move(0);
+    // Set initial pose, invert x and adjust theta
+    chassis.setPose(0, 0, 360 - 152.8);  // Assuming angles are in degrees
 
-    chassis.moveToPose(-9, -52, 90, 4000);
-    pros::delay(2000);
-    doinker.set_value(true);
-    chassis.moveToPose(-34, -50, 80, 4000, {.forwards = false, .maxSpeed = 35});
-    pros::delay(2000);
-    doinker.set_value(false);
-    // chassis.moveToPose(-15, -44.5, 75, 4000, {.forwards = false});
-    chassis.moveToPose(-10, -52, 80, 4000, {.forwards = false});
-    pros::delay(1500);
     mogo.set_value(true);
+
+    // Move to mirrored pose
+    chassis.moveToPose(12.5, 26.4, 360 - 152.8, 1800, {.forwards=false, .lead=0, .maxSpeed = 105, .minSpeed = 15}, true);
+
+    pros::delay(700);
+
+    mogo.set_value(false); // camp doww
+
+    // Turn to mirrored heading
+    chassis.turnToHeading(270, 1800);  // Mirror angle
+
     uptake.move(127);
-    pros::delay(2000);
-    mogo.set_value(false);
-    handleLBStateDown();
-    uptake.move_relative(-200, 127);
-    chassis.moveToPoint(-23.5, -47, 4000);
-    chassis.turnToHeading(180, 4000);
-    chassis.moveToPose(-23.5, -34, 0, 4000, {.forwards = false});
-    pros::delay(1500);
-    mogo.set_value(false);
-    uptake.move(127);
+
+    pros::delay(700);
+
+    // Move to another mirrored pose
+    chassis.moveToPose(-4.4, 26.4, 270, 2500, {.forwards=true, .lead=0, .maxSpeed = 115, .minSpeed = 15}, false);
+
+    pros::delay(1000);
+
+    // Turn back to 0, which is symmetric
+    chassis.turnToHeading(90, 2500);
 
     // --- NON RUSH --- //
 
