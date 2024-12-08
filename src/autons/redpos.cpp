@@ -25,8 +25,7 @@
 ASSET(redpos1_txt);
 
 void redpos() {
-
-    // chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
+// chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
     chassis.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
     // --- RUSH --- //
 
@@ -35,31 +34,29 @@ void redpos() {
     preroller.move(127);
 
     // Set initial pose, invert x and adjust theta
-    chassis.setPose(0, 0, 360 - 152.8);  // Assuming angles are in degrees
+    chassis.setPose(0, 0, 207.2);  // Assuming angles are in degrees
 
     mogo.set_value(true);
 
     // Move to mirrored pose
-    chassis.moveToPose(12.5, 26.4, 360 - 152.8, 1800, {.forwards=false, .lead=0, .maxSpeed = 105, .minSpeed = 15}, true);
+    chassis.moveToPose(12.5, 23.4, 207.2, 1800, {.forwards=false, .lead=0, .maxSpeed = 95, .minSpeed = 15}, true);
 
     pros::delay(700);
 
     mogo.set_value(false); // camp doww
 
     // Turn to mirrored heading
-    chassis.turnToHeading(270, 1800);  // Mirror angle
+    chassis.turnToHeading(136.36, 1800);  // Mirror angle
+
+    pros::delay(300);
 
     uptake.move(127);
 
-    pros::delay(700);
+    chassis.moveToPose(22.5, 7.62, 136.36, 2500, {.forwards=true, .lead=0, .maxSpeed = 100, .minSpeed = 25}, true);
 
-    // Move to another mirrored pose
-    chassis.moveToPose(-4.4, 26.4, 270, 2500, {.forwards=true, .lead=0, .maxSpeed = 115, .minSpeed = 15}, false);
+    pros::delay(1200);
 
-    pros::delay(1000);
-
-    // Turn back to 0, which is symmetric
-    chassis.turnToHeading(90, 2500);
+    chassis.turnToHeading(0, 2000);
 
     // --- NON RUSH --- //
 

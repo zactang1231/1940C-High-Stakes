@@ -72,14 +72,14 @@ void autonomous() {
     // leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     // rightMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
-    setAllianceColour('b');
+    setAllianceColour('r');
     chassis.setPose(0,0,0);
     autocontrolInit();
 
-    // redpos();
+    redpos();
     // blueneg();
     // redneg();
-    bluepos();
+    // bluepos();
     // autonSkills();
 
     // chassis.moveToPoint(0, 24, 100000);
@@ -93,6 +93,6 @@ void opcontrol() {
     leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
     leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 
-    setAllianceColour('b');
+    setAllianceColour('r');
     opcontrolInit();
 }

@@ -50,13 +50,12 @@ void bluepos() {
 
     uptake.move(127);
 
-    chassis.moveToPose(-22.5, 13.62, 223.64, 1800, {.forwards=true, .lead=0, .maxSpeed = 110, .minSpeed = 15}, true);
+    chassis.moveToPose(-22.5, 10.62, 223.64, 2500, {.forwards=true, .lead=0, .maxSpeed = 100, .minSpeed = 25}, true);
 
     pros::delay(700);
 
     chassis.turnToHeading(0, 2000);
 
-    chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
 
     // // Move to another mirrored pose
     // chassis.moveToPose(4.4, 26.4, 270, 2500, {.forwards=true, .lead=0, .maxSpeed = 115, .minSpeed = 15}, false);
