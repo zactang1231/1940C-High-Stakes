@@ -17,7 +17,7 @@ extern pros::MotorGroup leftMotors;
 extern pros::MotorGroup rightMotors;
 
 extern pros::Motor preroller;
-extern pros::Motor uptake;
+extern pros::Motor intake;
 extern pros::Motor lb;
 
 extern pros::adi::DigitalOut mogo;

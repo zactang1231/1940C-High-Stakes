@@ -28,7 +28,7 @@ ASSET(blueneg2_txt);
 void blueneg() {
     preroller.move(127);
     uptake_mutex.take();
-    uptake.move(0);
+    intake.move(0);
     uptake_mutex.give();
     handleLBStateUp();
     mogo.set_value(true);
@@ -43,7 +43,7 @@ void blueneg() {
     mogo.set_value(false);
     // Ring
     chassis.moveToPose(23.5, 47, 0, 4000, {.maxSpeed = 127});
-    uptake.move(127);
+    intake.move(127);
     // Quad stack
     chassis.moveToPose(10, 49, 280, 4000);
     chassis.moveToPose(23.5, 47, 280, 4000, {.forwards = false});

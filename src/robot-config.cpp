@@ -64,14 +64,13 @@ pros::Controller controller1(pros::E_CONTROLLER_MASTER);
 // pros::MotorGroup leftMotors({L1, L2, L3}); // left motor group - ports 11, 14, 16
 // pros::MotorGroup rightMotors({R1, R2, R3}); // left motor group - ports 11, 14, 16
 
-pros::MotorGroup leftMotors({-11, -14, -16}, pros::MotorGearset::green); // left motor group - ports 11, 14, 16
-pros::MotorGroup rightMotors({12, 13, 5}, pros::MotorGearset::green); // right motor group - ports 12, 13, 5 (all reversed, so they're negative)
+pros::MotorGroup leftMotors({1, -2, -3}, pros::MotorGearset::blue); // left motor group - ports 11, 14, 16
+pros::MotorGroup rightMotors({-4, 5, 6}, pros::MotorGearset::blue); // right motor group - ports 12, 13, 5 (all reversed, so they're negative)
 
 // motors - migrated from robot-config.cpp from states code
-pros::Motor preroller(1, pros::MotorGearset::green);
-// pros::MotorGroup uptake({3,15}, pros::MotorGearset::green);
-pros::Motor uptake(15, pros::MotorGearset::green);
-pros::Motor lb(3, pros::MotorGearset::green);
+pros::Motor intake(9, pros::MotorGearset::blue);
+pros::Motor preroller(20, pros::MotorGearset::blue);
+pros::Motor lb(10, pros::MotorGearset::green);
 
 // pistons - migrated from robot-config.cpp from states code
 pros::adi::DigitalOut mogo('A');
@@ -84,8 +83,8 @@ pros::Optical reject(4);
 /* TRACKING WHEELS */
 
 // tracking wheels. we are using rotation sensors with 2" wheels
-pros::Rotation horizontalEnc(-18);
-pros::Rotation verticalEnc(-8);
+pros::Rotation horizontalEnc(-8);
+pros::Rotation verticalEnc(-7);
 lemlib::TrackingWheel horizontal(&horizontalEnc, lemlib::Omniwheel::NEW_2, horizontalOffset);
 lemlib::TrackingWheel vertical(&verticalEnc, lemlib::Omniwheel::NEW_2, verticalOffset);
 
@@ -210,16 +209,16 @@ void updateUptakeMotor() {
 
     switch (uptakeState) {
         case FORWARD:
-            uptake.move(127);
+            intake.move(127);
             std::cout << "Uptake: FORWARD" << std::endl;
             break;
         case REVERSE:
-            uptake.move(-127);
+            intake.move(-127);
             std::cout << "Uptake: REVERSE" << std::endl;
             break;
         case OFF:
         default:
-            uptake.move(0);
+            intake.move(0);
             std::cout << "Uptake: OFF" << std::endl;
             break;
     }
@@ -313,12 +312,12 @@ void rejectRing() {
         if (acceptColour == 'b') {
             if (red > RED_THRESHOLD && green < red && blue < red) {
                 uptake_mutex.take();
-                uptake.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+                intake.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
                 pros::delay(25);
-                uptake.move(0);
+                intake.move(0);
                 pros::delay(1000);
-                uptake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-                uptake.move(127);
+                intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+                intake.move(127);
                 controller1.clear();
                 controller1.print(0,0, "bye bye red ring");
                 pros::delay(500);
@@ -328,12 +327,12 @@ void rejectRing() {
         else if (acceptColour == 'r') {
             if (blue > BLUE_THRESHOLD && red < blue && green < blue) {
                 uptake_mutex.take();
-                uptake.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+                intake.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
                 pros::delay(25);
-                uptake.move(0);
+                intake.move(0);
                 pros::delay(1000);
-                uptake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-                uptake.move(127);
+                intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+                intake.move(127);
                 controller1.clear();
                 controller1.print(0,0, "bye bye blue ring");
                 uptake_mutex.give();

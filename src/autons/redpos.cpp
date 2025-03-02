@@ -50,7 +50,7 @@ void redpos() {
 
     pros::delay(300);
 
-    uptake.move(127);
+    intake.move(127);
 
     chassis.moveToPose(22.5, 7.62, 136.36, 2500, {.forwards=true, .lead=0, .maxSpeed = 100, .minSpeed = 25}, true);
 

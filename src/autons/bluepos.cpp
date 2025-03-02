@@ -48,7 +48,7 @@ void bluepos() {
     // Turn to mirrored heading
     chassis.turnToHeading(223.64, 1800);  // Mirror angle
 
-    uptake.move(127);
+    intake.move(127);
 
     chassis.moveToPose(-22.5, 10.62, 223.64, 2500, {.forwards=true, .lead=0, .maxSpeed = 100, .minSpeed = 25}, true);
 
