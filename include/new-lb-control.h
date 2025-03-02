@@ -35,3 +35,5 @@ extern unsigned long r1PressStart;  // Time when R1 (down) was pressed
 extern unsigned long r2PressStart;  // Time when R2 (up) was pressed
 extern bool previousR1;             // Previous state of R1 button
 extern bool previousR2;             // Previous state of R2 button
+
+extern void NewLBSpinToTarget();

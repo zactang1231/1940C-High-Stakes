@@ -3,6 +3,7 @@
 #include "opcontrol.h"
 #include "autocontrol.h"
 #include "lady-brown.h"
+#include "new-lb-control.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "pros/adi.hpp"
 #include "pros/llemu.hpp"
@@ -435,7 +436,8 @@ void moveDistance(double targetDistanceInches, int maxSpeed) {
 // Initialize robot and start the task
 void opcontrolInit() {
     pros::Task opcontrolLoopTask(opcontrolLoop);
-    pros::Task lbLoopTask(LBSpinToTarget);
+    // pros::Task lbLoopTask(LBSpinToTarget);
+    pros::Task lbLoopTask(NewLBSpinToTarget);
 }
 
 void autocontrolInit() { 

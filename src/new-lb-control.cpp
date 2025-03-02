@@ -18,7 +18,7 @@
 
 #include <iostream>
 
-pros::Mutex lb_mutex;
+pros::Mutex new_lb_mutex;
 
 // --- Constants for LB Presets and Thresholds ---
 const double LB_PRESET_HIGH = -840;    // Loading position 1 (higher)
@@ -31,7 +31,7 @@ unsigned long r1PressStart = 0, r2PressStart = 0;
 bool previousR1 = false, previousR2 = false;
 
 // PID control function for LB snapping (assumed tuned already)
-void LBMoveToTarget(double targetPosition) {
+void NewLBMoveToTarget(double targetPosition) {
     static double lastError = 0;
     static double integral = 0;
     const double tolerance = 5;     // Acceptable error threshold
@@ -84,7 +84,7 @@ void LBControl() {
                 }
                 // PID-controlled snap to the target preset
                 while (fabs(lb.get_position() - target) > 5) {
-                    LBMoveToTarget(target);
+                    NewLBMoveToTarget(target);
                     pros::delay(20);
                 }
                 lb.move(0);
@@ -118,7 +118,7 @@ void LBControl() {
                     target = LB_PRESET_HIGH;
                 }
                 while (fabs(lb.get_position() - target) > 5) {
-                    LBMoveToTarget(target);
+                    NewLBMoveToTarget(target);
                     pros::delay(20);
                 }
                 lb.move(0);
@@ -136,15 +136,8 @@ void LBControl() {
 }
 
 // Called repeatedly in the control loop (or as a separate task)
-void LBSpinToTarget() {
-    lb_mutex.take();
+void NewLBSpinToTarget() {
+    new_lb_mutex.take();
     LBControl();
-    lb_mutex.give();
-}
-
-void opcontrolLoop() {
-    while (true) {
-        LBSpinToTarget();
-        pros::delay(20);
-    }
+    new_lb_mutex.give();
 }
