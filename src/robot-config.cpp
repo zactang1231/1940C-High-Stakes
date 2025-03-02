@@ -62,7 +62,7 @@ pros::Controller controller1(pros::E_CONTROLLER_MASTER);
 // pros::Motor R3(5, pros::MotorGearset::green);
 
 // pros::MotorGroup leftMotors({L1, L2, L3}); // left motor group - ports 11, 14, 16
-// pros::MotorGroup rightMotors({R1, R2, R3}); // left motor group - ports 11, 14, 16
+// pros::MotorGroup rightMotors({R19, R2, R3}); // left motor group - ports 11, 14, 16
 
 pros::MotorGroup leftMotors({1, -2, -3}, pros::MotorGearset::blue); // left motor group - ports 11, 14, 16
 pros::MotorGroup rightMotors({-4, 5, 6}, pros::MotorGearset::blue); // right motor group - ports 12, 13, 5 (all reversed, so they're negative)

@@ -21,7 +21,7 @@
 enum lbState { LOADING, DEFAULT, SCORING };
 lbState LBState = DEFAULT;
 
-bool previousRight = false;
+bool previousUp = false;
 bool previousDown = false;
 
 float LBTargetPos = 210;
@@ -125,17 +125,17 @@ void updateLBMotor() {
 
 void LBSpinToTarget() {
     while (true) {
-        bool currentRight = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT);
-        bool currentDown = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN);
+        bool currentUp = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_R2);
+        bool currentDown = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_R1);
 
-        if (currentRight && !previousRight) { // Rising edge detection
+        if (currentUp && !previousUp) { // Rising edge detection
             handleLBStateUp();
         }
         if (currentDown && !previousDown) { // Rising edge detection
             handleLBStateDown();
         }
 
-        previousRight = currentRight; // Update state
+        previousUp = currentUp; // Update state
         previousDown = currentDown;
 
         updateLBMotor();
