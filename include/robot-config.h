@@ -18,7 +18,8 @@ extern pros::MotorGroup rightMotors;
 
 extern pros::Motor preroller;
 extern pros::Motor intake;
-extern pros::Motor lb;
+extern pros::MotorGroup lb;
+extern pros::Rotation lb_sensor;
 
 extern pros::adi::DigitalOut mogo;
 extern pros::adi::DigitalOut doinker;

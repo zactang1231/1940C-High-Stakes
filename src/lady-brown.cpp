@@ -19,7 +19,7 @@
 #include <iostream>
 
 enum lbState { LOADING, DEFAULT, SCORING };
-lbState LBState = LOADING;
+lbState LBState = DEFAULT;
 
 bool previousUp = false;
 bool previousDown = false;
@@ -29,48 +29,59 @@ float LBTargetPos = 0;
 pros::Mutex lb_mutex;
 
 // PID constants
-double kP = 0.7; // Proportional gain
+double kP = 0.3; // Proportional gain
 double kI = 0.0; // Integral gain
-double kD = 0.6; // Derivative gain
+double kD = 0.0; // Derivative gain
 
 void LBMoveToTarget(double targetPosition) {
-    static double error = 0;               // Difference between target and current position
-    static double lastError = 0;           // Previous error for derivative calculation
-    static double integral = 0;            // Integral of errors
-    static const double tolerance = 5;     // Tolerance for stopping, in degrees
-    static const double maxSpeed = 200;    // Maximum motor speed
-    double motorSpeed = 0;                 // Calculated motor speed
+    // static double error = 0;               // Difference between target and current position
+    // static double lastError = 0;           // Previous error for derivative calculation
+    // static double integral = 0;            // Integral of errors
+    // static const double tolerance = 5;     // Tolerance for stopping, in degrees
+    // static const double maxSpeed = 200;    // Maximum motor speed
+    // double motorSpeed = 0;                 // Calculated motor speed
 
-    // Get the current position
-    double currentPosition = lb.get_position();
+    // // Get the current position
+    // double currentPosition = lb_sensor.get_position();
 
-    // Calculate error
-    error = targetPosition - currentPosition;
+    // // Calculate error
+    // error = targetPosition - currentPosition;
 
-    // Exit if within tolerance
-    if (fabs(error) <= tolerance) {
-        lb.move(0); // Stop the motor
-        return;     // Exit the function
+    // // Exit if within tolerance
+    // if (fabs(error) <= tolerance) {
+    //     lb.move(0); // Stop the motor
+    //     return;     // Exit the function
+    // }
+
+    // // Calculate integral (accumulated error)
+    // integral += error;
+    // integral = fmax(fmin(integral, 100), -100); // Anti-windup (limit integral)
+
+    // // Calculate derivative (change in error)
+    // double derivative = error - lastError;
+
+    // // Calculate motor speed using PID formula
+    // motorSpeed = (kP * error) + (kI * integral) + (kD * derivative);
+
+    // // Clamp motor speed to maximum limits
+    // motorSpeed = fmax(fmin(motorSpeed, maxSpeed), -maxSpeed);
+
+    // // Set motor speed
+    // lb.move(-motorSpeed);
+
+    // // Update last error
+    // lastError = error;
+
+
+    while (fabs(lb_sensor.get_position() - targetPosition) > 10) {
+        double error = targetPosition - lb_sensor.get_position();
+        // Simple proportional control: speed is maxSpeed scaled by error sign.
+        int speed = (error < 0) ? 200 : -200;
+        lb.move_velocity(speed);
+        pros::delay(20);  // Delay to allow sensor update and motor response.
     }
-
-    // Calculate integral (accumulated error)
-    integral += error;
-    integral = fmax(fmin(integral, 100), -100); // Anti-windup (limit integral)
-
-    // Calculate derivative (change in error)
-    double derivative = error - lastError;
-
-    // Calculate motor speed using PID formula
-    motorSpeed = (kP * error) + (kI * integral) + (kD * derivative);
-
-    // Clamp motor speed to maximum limits
-    motorSpeed = fmax(fmin(motorSpeed, maxSpeed), -maxSpeed);
-
-    // Set motor speed
-    lb.move(motorSpeed);
-
-    // Update last error
-    lastError = error;
+    // Stop the motor once the target is reached.
+    lb.move_velocity(0);
 }
 
 void handleLBStateDown() {

@@ -13,6 +13,7 @@
 #include "pros/motors.hpp"
 #include "pros/optical.hpp"
 #include "pros/rotation.h"
+#include "pros/rotation.hpp"
 #include "pros/rtos.hpp"
 #include "pros/screen.hpp"
 #include <cstddef>
@@ -71,7 +72,8 @@ pros::MotorGroup rightMotors({-4, 5, 6}, pros::MotorGearset::blue); // right mot
 // motors - migrated from robot-config.cpp from states code
 pros::Motor intake(9, pros::MotorGearset::blue);
 pros::Motor preroller(20, pros::MotorGearset::blue);
-pros::Motor lb(10, pros::MotorGearset::green);
+pros::MotorGroup lb({10,11}, pros::MotorGearset::green);
+pros::Rotation lb_sensor(-20);
 
 // pistons - migrated from robot-config.cpp from states code
 pros::adi::DigitalOut mogo('A');

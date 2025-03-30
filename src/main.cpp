@@ -75,6 +75,7 @@ void autonomous() {
     setAllianceColour('r');
     chassis.setPose(0,0,0);
     autocontrolInit();
+    lb_sensor.reset();
 
     redpos();
     // blueneg();
