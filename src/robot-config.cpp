@@ -437,7 +437,7 @@ void moveDistance(double targetDistanceInches, int maxSpeed) {
 void opcontrolInit() {
     pros::Task opcontrolLoopTask(opcontrolLoop);
     // pros::Task lbLoopTask(LBSpinToTarget);
-    pros::Task lbLoopTask(NewLBSpinToTarget);
+    pros::Task lbLoopTask(LBSpinToTarget);
 }
 
 void autocontrolInit() { 

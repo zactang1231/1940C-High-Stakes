@@ -19,12 +19,12 @@
 #include <iostream>
 
 enum lbState { LOADING, DEFAULT, SCORING };
-lbState LBState = DEFAULT;
+lbState LBState = LOADING;
 
 bool previousUp = false;
 bool previousDown = false;
 
-float LBTargetPos = 210;
+float LBTargetPos = 0;
 
 pros::Mutex lb_mutex;
 
@@ -75,23 +75,23 @@ void LBMoveToTarget(double targetPosition) {
 
 void handleLBStateDown() {
     if (LBState == SCORING) {
-        LBState = DEFAULT; // Go to default if scoring 
+        LBState = LOADING; // Go to loading if scoring 
         controller1.print (0,0,"scoring-default");
-    } else if (LBState == DEFAULT) {
-        LBState = LOADING; // Go to loading if default
-        controller1.print (0,0,"default-loading");
     } else if (LBState == LOADING) {
-        // Stay in LOADING if already there
+        LBState = DEFAULT; // Go to desfault if loading
+        controller1.print (0,0,"default-loading");
+    } else if (LBState == DEFAULT) {
+        // Stay in DEFAULT if already there
         controller1.print (0,0,"loading");
     }
 }
 
 void handleLBStateUp() {
-    if (LBState == LOADING) {
-        LBState = DEFAULT; // Go to default if loading 
+    if (LBState == DEFAULT) {
+        LBState = LOADING; // Go to loading if default 
         controller1.print (0,0,"loading-default");
-    } else if (LBState == DEFAULT) {
-        LBState = SCORING; // Go to scoring if default
+    } else if (LBState == LOADING) {
+        LBState = SCORING; // Go to scoring if loading
         controller1.print (0,0,"default-scoring");
     } else if (LBState == SCORING) {
         // Stay in SCORING if already there
@@ -105,17 +105,17 @@ void updateLBMotor() {
     switch (LBState) {
         case LOADING:
             // lb.move_absolute(0, 100);
-            LBTargetPos = 0;
+            LBTargetPos = 265;
             std::cout << "Lady Brown: Scoring" << std::endl;
             break;
         case DEFAULT:
             // lb.move_absolute(-210, 100);
-            LBTargetPos = -290;
+            LBTargetPos = 0;
             std::cout << "Lady Brown: Default" << std::endl;
             break;
         case SCORING:
             // lb.move_absolute(-500, 100);
-            LBTargetPos = -840;
+            LBTargetPos = 1000;
             std::cout << "Lady Brown: Loading" << std::endl;
             break;
     }
@@ -125,8 +125,8 @@ void updateLBMotor() {
 
 void LBSpinToTarget() {
     while (true) {
-        bool currentUp = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_R2);
-        bool currentDown = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_R1);
+        bool currentUp = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_R1);
+        bool currentDown = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_R2);
 
         if (currentUp && !previousUp) { // Rising edge detection
             handleLBStateUp();
