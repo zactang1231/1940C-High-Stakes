@@ -303,11 +303,6 @@ void rejectRing() {
         int red = rgb.red;     // get red 
         int green = rgb.green; // get green 
         int blue = rgb.blue;   // get blue
-        pros::lcd::initialize();
-        pros::screen::print(TEXT_LARGE,0,"Red: %d", red);
-        pros::screen::print(TEXT_LARGE,1,"Green: %d", green);
-        pros::screen::print(TEXT_LARGE,2,"Blue: %d", blue);
-
         // Define thresholds for red and blue detection
         const int RED_THRESHOLD = 1000;
         const int BLUE_THRESHOLD = 1000;
