@@ -30,6 +30,8 @@ void initialize() {
     chassis.calibrate(); // calibrate sensors
     verticalEnc.reset();
     horizontalEnc.reset();
+    lb_sensor.reset();
+    lb.tare_position();
 
     // the default rate is 50. however, if you need to change the rate, you
     // can do the following.
@@ -75,7 +77,6 @@ void autonomous() {
     setAllianceColour('r');
     chassis.setPose(0,0,0);
     autocontrolInit();
-    lb_sensor.reset();
 
     redpos();
     // blueneg();

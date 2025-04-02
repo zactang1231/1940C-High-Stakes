@@ -18,142 +18,38 @@
 
 #include <iostream>
 
-enum lbState { LOADING, DEFAULT, SCORING };
-lbState LBState = DEFAULT;
+// Enum to represent the different lift states
+// enum class LiftState { DEFAULT, LOADING_2, LOADING_1, SCORING, FLIPPING };
 
-bool previousUp = false;
-bool previousDown = false;
+// Array of target positions corresponding to each state (in degrees)
+const double states[5] = {0.0, 15.0, 90.0, 135.0, 180.0}; //change pls
 
-float LBTargetPos = 0;
+int curState = 0;
+int target = 0;
 
-pros::Mutex lb_mutex;
-
-// PID constants
-double kP = 0.3; // Proportional gain
-double kI = 0.0; // Integral gain
-double kD = 0.0; // Derivative gain
-
-void LBMoveToTarget(double targetPosition) {
-    // static double error = 0;               // Difference between target and current position
-    // static double lastError = 0;           // Previous error for derivative calculation
-    // static double integral = 0;            // Integral of errors
-    // static const double tolerance = 5;     // Tolerance for stopping, in degrees
-    // static const double maxSpeed = 200;    // Maximum motor speed
-    // double motorSpeed = 0;                 // Calculated motor speed
-
-    // // Get the current position
-    // double currentPosition = lb_sensor.get_position();
-
-    // // Calculate error
-    // error = targetPosition - currentPosition;
-
-    // // Exit if within tolerance
-    // if (fabs(error) <= tolerance) {
-    //     lb.move(0); // Stop the motor
-    //     return;     // Exit the function
-    // }
-
-    // // Calculate integral (accumulated error)
-    // integral += error;
-    // integral = fmax(fmin(integral, 100), -100); // Anti-windup (limit integral)
-
-    // // Calculate derivative (change in error)
-    // double derivative = error - lastError;
-
-    // // Calculate motor speed using PID formula
-    // motorSpeed = (kP * error) + (kI * integral) + (kD * derivative);
-
-    // // Clamp motor speed to maximum limits
-    // motorSpeed = fmax(fmin(motorSpeed, maxSpeed), -maxSpeed);
-
-    // // Set motor speed
-    // lb.move(-motorSpeed);
-
-    // // Update last error
-    // lastError = error;
-
-
-    while (fabs(lb_sensor.get_position() - targetPosition) > 10) {
-        double error = targetPosition - lb_sensor.get_position();
-        // Simple proportional control: speed is maxSpeed scaled by error sign.
-        int speed = (error < 0) ? 200 : -200;
-        lb.move_velocity(speed);
-        pros::delay(20);  // Delay to allow sensor update and motor response.
-    }
-    // Stop the motor once the target is reached.
-    lb.move_velocity(0);
+void upState() {
+    curState += 1;
+    target = states[curState];
 }
 
-void handleLBStateDown() {
-    if (LBState == SCORING) {
-        LBState = LOADING; // Go to loading if scoring 
-        controller1.print (0,0,"scoring-default");
-    } else if (LBState == LOADING) {
-        LBState = DEFAULT; // Go to desfault if loading
-        controller1.print (0,0,"default-loading");
-    } else if (LBState == DEFAULT) {
-        // Stay in DEFAULT if already there
-        controller1.print (0,0,"loading");
-    }
+void downState() {
+    curState -= 1;
+    target = states[curState];
 }
 
-void handleLBStateUp() {
-    if (LBState == DEFAULT) {
-        LBState = LOADING; // Go to loading if default 
-        controller1.print (0,0,"loading-default");
-    } else if (LBState == LOADING) {
-        LBState = SCORING; // Go to scoring if loading
-        controller1.print (0,0,"default-scoring");
-    } else if (LBState == SCORING) {
-        // Stay in SCORING if already there
-        controller1.print (0,0,"scoring");
-    }
+void lbControl() {
+    double kP = 0.1;
+    double kD = 0.1;
+    double prevError = 0;
+    double error = target - lb_sensor.get_position();
+
+    double proportional = kP * error;
+    double derivative = (kD * (error - prevError)) / 20; // divide by time delay
+    double output = proportional + derivative;
+    lb.move(output);
+
+    prevError = error;
+
+    pros::delay(20);
 }
 
-void updateLBMotor() {
-    lb_mutex.take(); // lock mutex (uptake is mine now)
-
-    switch (LBState) {
-        case LOADING:
-            // lb.move_absolute(0, 100);
-            LBTargetPos = 265;
-            std::cout << "Lady Brown: Scoring" << std::endl;
-            break;
-        case DEFAULT:
-            // lb.move_absolute(-210, 100);
-            LBTargetPos = 0;
-            std::cout << "Lady Brown: Default" << std::endl;
-            break;
-        case SCORING:
-            // lb.move_absolute(-500, 100);
-            LBTargetPos = 1000;
-            std::cout << "Lady Brown: Loading" << std::endl;
-            break;
-    }
-
-    lb_mutex.give(); // release mutex (uptake can be used elsewhere)
-}
-
-void LBSpinToTarget() {
-    while (true) {
-        bool currentUp = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_R1);
-        bool currentDown = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_R2);
-
-        if (currentUp && !previousUp) { // Rising edge detection
-            handleLBStateUp();
-        }
-        if (currentDown && !previousDown) { // Rising edge detection
-            handleLBStateDown();
-        }
-
-        previousUp = currentUp; // Update state
-        previousDown = currentDown;
-
-        updateLBMotor();
-        LBMoveToTarget(LBTargetPos);
-        // lb.move_absolute(LBTargetPos, 100);
-
-        pros::delay(25); // Allow time for button state to settle
-
-    }
-}

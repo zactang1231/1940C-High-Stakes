@@ -18,7 +18,11 @@
 
 #include <iostream>
 
-extern void handleLBStateUp();
-extern void handleLBStateDown();
+// extern void handleLBStateUp();
+// extern void handleLBStateDown();
 
-extern void LBSpinToTarget();
+// extern void LBSpinToTarget();
+
+void upState();
+void downState();
+void lbControl();

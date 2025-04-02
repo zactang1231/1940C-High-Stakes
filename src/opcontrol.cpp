@@ -44,9 +44,9 @@ void opcontrolLoop(void* param) {
 
     reject.set_led_pwm(100);
 
-    handleLBStateDown();
-    handleLBStateDown();
-    handleLBStateUp();
+    // handleLBStateDown();
+    // handleLBStateDown();
+    // handleLBStateUp();
 
     // andy likes SPLIT ARCADE drive
     // tank drive is too confusing :(

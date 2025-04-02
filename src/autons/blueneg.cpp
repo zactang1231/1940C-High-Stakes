@@ -30,7 +30,7 @@ void blueneg() {
     uptake_mutex.take();
     intake.move(0);
     uptake_mutex.give();
-    handleLBStateUp();
+    // handleLBStateUp();
     mogo.set_value(true);
 
     chassis.setPose(56, 14.5, 0);
@@ -52,5 +52,5 @@ void blueneg() {
     chassis.moveToPose(23.5, 47, 260, 4000);
     // Ladder
     chassis.moveToPose(15, 14, 225, 4000, {.forwards = false});
-    handleLBStateDown();
+    // handleLBStateDown();
 }   

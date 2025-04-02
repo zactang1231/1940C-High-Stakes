@@ -48,7 +48,7 @@ void autocontrolLoop(void* param) {
     // this runs during auton the whole time
     while (true) {
         rejectRing();
-        LBSpinToTarget();
+        // LBSpinToTarget();
 
         // delay so the Brain doesn't explode
         pros::delay(25);

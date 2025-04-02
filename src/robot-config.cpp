@@ -72,7 +72,7 @@ pros::MotorGroup rightMotors({-4, 5, 6}, pros::MotorGearset::blue); // right mot
 // motors - migrated from robot-config.cpp from states code
 pros::Motor intake(9, pros::MotorGearset::blue);
 pros::Motor preroller(20, pros::MotorGearset::blue);
-pros::MotorGroup lb({10,11}, pros::MotorGearset::green);
+pros::MotorGroup lb({10,-11}, pros::MotorGearset::green);
 pros::Rotation lb_sensor(-20);
 
 // pistons - migrated from robot-config.cpp from states code
@@ -439,7 +439,16 @@ void moveDistance(double targetDistanceInches, int maxSpeed) {
 void opcontrolInit() {
     pros::Task opcontrolLoopTask(opcontrolLoop);
     // pros::Task lbLoopTask(LBSpinToTarget);
-    pros::Task lbLoopTask(LBSpinToTarget);
+    pros::Task lift_task([] {
+        while (true) {
+            if (controller1.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R1)) {
+                downState();
+            } else if (controller1.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R2)) {
+                upState();
+            }
+            lbControl();
+        }
+    });
 }
 
 void autocontrolInit() { 
