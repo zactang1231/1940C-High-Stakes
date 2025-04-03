@@ -184,8 +184,8 @@ void prerollerStop() {
 // }
 
 void handleUptakeState() {
-    bool currentL1 = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_L1);
-    bool currentL2 = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_L2);
+    bool currentL1 = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_R1);
+    bool currentL2 = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_R2);
 
     // Toggle forward state with L1
     if (currentL1 && !previousL1) { // Rising edge detection for L1
@@ -232,7 +232,7 @@ void updateUptakeMotor() {
 void uptakeForward() {
     uptake_mutex.take(); // lock mutex (uptake is mine now)
 
-    bool currentL1 = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_L1);
+    bool currentL1 = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_R1);
     if (currentL1 && !previousL1) { // Rising edge detection for L1
         if (uptakeState == FORWARD) {
             uptakeState = OFF; // Stop the motor if already running forward
@@ -436,9 +436,9 @@ void opcontrolInit() {
     // pros::Task lbLoopTask(LBSpinToTarget);
     pros::Task lift_task([] {
         while (true) {
-            if (controller1.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R1)) {
+            if (controller1.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)) {
                 downState();
-            } else if (controller1.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R2)) {
+            } else if (controller1.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2)) {
                 upState();
             }
             lbControl();
