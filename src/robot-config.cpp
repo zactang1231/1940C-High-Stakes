@@ -40,7 +40,7 @@ bool previousX = false;
 bool previousY = false;
 bool previousL1 = false;
 
-bool rejectingOn = true;
+bool rejectingOn = false;
 
 float trackWidth = 13.0;
 float wheelDiameter = 3.0; 
@@ -153,7 +153,7 @@ lemlib::Chassis chassis(drivetrain, linearController, angularController, sensors
 
 // Mutex inits
 
-pros::Mutex uptake_mutex;
+// pros::Mutex uptake_mutex;
 
 // Preroller moves
 
@@ -242,15 +242,15 @@ void uptakeForward() {
     }
     previousL1 = currentL1; // Update the button state
 
-    uptake_mutex.give(); // lock mutex (uptake is mine now)
+    // uptake_mutex.give(); // lock mutex (uptake is mine now)
 }
 
 void uptakeReverse() {
-    uptake_mutex.take(); // lock mutex (uptake is mine now)
+    // uptake_mutex.take(); // lock mutex (uptake is mine now)
 
     uptakeState = REVERSE;
 
-    uptake_mutex.give(); // lock mutex (uptake is mine now)
+    // uptake_mutex.give(); // lock mutex (uptake is mine now)
     // bool currentL2 = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_L2);
     // if (currentL2 && !previousL2) { // Rising edge detection for L2
     //     if (uptakeState == REVERSE) {
@@ -309,7 +309,7 @@ void rejectRing() {
 
         if (acceptColour == 'b') {
             if (red > RED_THRESHOLD && green < red && blue < red) {
-                uptake_mutex.take();
+                // uptake_mutex.take();
                 intake.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
                 pros::delay(25);
                 intake.move(0);
@@ -319,12 +319,12 @@ void rejectRing() {
                 controller1.clear();
                 controller1.print(0,0, "bye bye red ring");
                 pros::delay(500);
-                uptake_mutex.give();
+                // uptake_mutex.give();
             }
         }
         else if (acceptColour == 'r') {
             if (blue > BLUE_THRESHOLD && red < blue && green < blue) {
-                uptake_mutex.take();
+                // uptake_mutex.take();
                 intake.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
                 pros::delay(25);
                 intake.move(0);
@@ -333,7 +333,7 @@ void rejectRing() {
                 intake.move(127);
                 controller1.clear();
                 controller1.print(0,0, "bye bye blue ring");
-                uptake_mutex.give();
+                // uptake_mutex.give();
             }
         }
     }

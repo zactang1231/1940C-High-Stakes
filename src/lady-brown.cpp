@@ -1,5 +1,6 @@
 #include "lemlib/chassis/trackingWheel.hpp"
 #include "main.h"
+#include "pros/rtos.h"
 #include "robot-config.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "pros/adi.hpp"
@@ -23,28 +24,44 @@
 // enum class LiftState { DEFAULT, LOADING_2, LOADING_1, SCORING, FLIPPING };
 
 // Array of target positions corresponding to each state
-const double states[5] = {0.0, 3900.0, 4500.0, 13000.0, 25000.0}; //change pls
+const double states[5] = {0.0, 3200.0, 4000.0, 13000.0, 25000.0}; //change pls
 
 int curState = 0;
 double target = states[0];
 double previous_error = 0;
 
 void upState() {
-    curState += 1;
-    target = states[curState];
-    pros::screen::print(TEXT_LARGE,6,"DOWN");
+    if (curState == 1 || curState == 2) {
+        // for (int i = 0; i < 3; i++) {
+        //     pros::delay(50);
+        //     intake.move(127);
+        //     pros::delay(1000);
+        //     intake.move(0);
+        // }
+
+        // uptake_mutex.take();
+        intake.move(-127);
+        // uptake_mutex.give();
+
+        curState += 1;
+        target = states[curState];
+    } else if (curState < 5) {
+        curState += 1;
+        target = states[curState];
+    }
 }
 
 void downState() {
-    curState -= 1;
-    target = states[curState];
-    pros::screen::print(TEXT_LARGE,6,"UP");
+    if (curState > 0) {
+        curState -= 1;
+        target = states[curState];
+    }
 }
  
 void lbControl() {
     // Gains
-    double kP = 0.03;
-    double kD = 0.001;
+    double kP = 0.02;
+    double kD = 0.0005;
 
     double dt = 0.02; // 20 ms time delay
 
@@ -60,7 +77,6 @@ void lbControl() {
     // lb.move(output);
 
     previous_error = error;
-
 
     pros::delay(20);
 

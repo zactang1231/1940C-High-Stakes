@@ -36,7 +36,7 @@ void opcontrolLoop(void* param) {
     // rightMotors.move_velocity(200);
 
     preroller.move_velocity(200);
-    intake.move_velocity(200);
+    intake.move_velocity(600);
     
     preroller.set_brake_mode (pros::E_MOTOR_BRAKE_COAST);
     intake.set_brake_mode (pros::E_MOTOR_BRAKE_COAST);
@@ -85,12 +85,12 @@ void opcontrolLoop(void* param) {
         previousB = currentB;
 
 
-        // Handle X button with debounce
-        bool currentX = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_X);
-        if (currentX && !previousX) {
-            rejectOnOff();
-        }
-        previousX = currentX;
+        // // Handle X button with debounce
+        // bool currentX = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_X);
+        // if (currentX && !previousX) {
+        //     rejectOnOff();
+        // }
+        // previousX = currentX;
 
         // Handle Y button with debounce
         bool currentY = controller1.get_digital(pros::E_CONTROLLER_DIGITAL_Y);
@@ -99,7 +99,7 @@ void opcontrolLoop(void* param) {
         }
         previousY = currentY;
 
-        rejectRing();
+        // rejectRing();
 
         // lb.move_absolute(-210, 20);
 
