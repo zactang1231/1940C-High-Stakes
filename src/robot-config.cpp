@@ -1,6 +1,6 @@
 #include "lemlib/chassis/trackingWheel.hpp"
 #include "main.h"
-#include "opcontrol.h"
+#include "../include/opcontrol.h"
 #include "autocontrol.h"
 #include "lady-brown.h"
 #include "new-lb-control.h"
@@ -66,18 +66,21 @@ pros::Controller controller1(pros::E_CONTROLLER_MASTER);
 // pros::MotorGroup leftMotors({L1, L2, L3}); // left motor group - ports 11, 14, 16
 // pros::MotorGroup rightMotors({R19, R2, R3}); // left motor group - ports 11, 14, 16
 
-pros::MotorGroup leftMotors({1, -2, -3}, pros::MotorGearset::blue); // left motor group - ports 11, 14, 16
-pros::MotorGroup rightMotors({-4, 5, 6}, pros::MotorGearset::blue); // right motor group - ports 12, 13, 5 (all reversed, so they're negative)
+// pros::MotorGroup leftMotors({1, -2, -3}, pros::MotorGearset::blue); // left motor group - ports 11, 14, 16
+// pros::MotorGroup rightMotors({-4, 5, 6}, pros::MotorGearset::blue); // right motor group - ports 12, 13, 5 (all reversed, so they're negative)
+
+pros::MotorGroup leftMotors({-1, -2, -3}, pros::MotorGearset::blue); // left motor group - ports 11, 14, 16
+pros::MotorGroup rightMotors({4, 5, 6}, pros::MotorGearset::blue);
 
 // motors - migrated from robot-config.cpp from states code
 pros::Motor intake(9, pros::MotorGearset::blue);
-pros::Motor preroller(20, pros::MotorGearset::blue);
 pros::MotorGroup lb({10,-11}, pros::MotorGearset::green);
 pros::Rotation lb_sensor(-20);
 
 // pistons - migrated from robot-config.cpp from states code
 pros::adi::DigitalOut mogo('A');
 pros::adi::DigitalOut doinker('B');
+pros::adi::DigitalOut doinker2('C');
 
 // sensors - migrated from robot-config.cpp from states code
 pros::Imu inertial(7);
@@ -86,8 +89,8 @@ pros::Optical reject(4);
 /* TRACKING WHEELS */
 
 // tracking wheels. we are using rotation sensors with 2" wheels
-pros::Rotation horizontalEnc(-8);
-pros::Rotation verticalEnc(-7);
+pros::Rotation horizontalEnc(12);
+pros::Rotation verticalEnc(-13);
 lemlib::TrackingWheel horizontal(&horizontalEnc, lemlib::Omniwheel::NEW_2, horizontalOffset);
 lemlib::TrackingWheel vertical(&verticalEnc, lemlib::Omniwheel::NEW_2, verticalOffset);
 
@@ -96,17 +99,17 @@ lemlib::TrackingWheel vertical(&verticalEnc, lemlib::Omniwheel::NEW_2, verticalO
 // drivetrain settings
 lemlib::Drivetrain drivetrain(&leftMotors, // left motor group
                               &rightMotors, // right motor group
-                              12.9921,
-                              lemlib::Omniwheel::NEW_4, // we're using new 4" omnis (omni gen 2)
-                              350, // drivetrain rpm is 350 (84/48*200)
+                              12.6,
+                              lemlib::Omniwheel::NEW_325,
+                              450, // drivetrain rpm is 350 (84/48*200)
                               8 // according to lemlib, centre traction wheels means horizontal drift is approx 8. we'll probs tune this later
 );
 
 // lateral motion controller
-lemlib::ControllerSettings linearController(7, // proportional gain (kP)
+lemlib::ControllerSettings linearController(15, // proportional gain (kP)
                                             0, // integral gain (kI)
-                                            25, // derivative gain (kD)
-                                            0, // anti windup
+                                            5, // derivative gain (kD)
+                                            3, // anti windup
                                             1, // small error range, in inches
                                             100, // small error range timeout, in milliseconds
                                             3, // large error range, in inches
@@ -118,9 +121,9 @@ lemlib::ControllerSettings linearController(7, // proportional gain (kP)
 
 // angular motion controller
 lemlib::ControllerSettings angularController(4, // proportional gain (kP)
-                                             0, // integral gain (kI)1
-                                             40, // derivative gain (kD)
-                                             0, // anti windup
+                                             0.045, // integral gain (kI)1
+                                             30.5, // derivative gain (kD)
+                                             3, // anti windup
                                              1, // small error range, in degrees
                                              100, // small error range timeout, in milliseconds
                                              3, // large error range, in degrees
@@ -151,23 +154,6 @@ lemlib::ExpoDriveCurve steerCurve(3, // joystick deadband out of 127
 // create the chassis
 lemlib::Chassis chassis(drivetrain, linearController, angularController, sensors, &throttleCurve, &steerCurve);
 
-// Mutex inits
-
-// pros::Mutex uptake_mutex;
-
-// Preroller moves
-
-void prerollerForward() {
-    preroller.move(-127);
-}
-
-void prerollerReverse() {
-    preroller.move(127);
-}
-
-void prerollerStop() {
-    preroller.move(0);
-}
 
 // LB moves
 
@@ -432,13 +418,13 @@ void moveDistance(double targetDistanceInches, int maxSpeed) {
 
 // Initialize robot and start the task
 void opcontrolInit() {
-    pros::Task opcontrolLoopTask(opcontrolLoop);
+    // pros::Task opcontrolLoopTask(opcontrolLoop);
     // pros::Task lbLoopTask(LBSpinToTarget);
     pros::Task lift_task([] {
         while (true) {
-            if (controller1.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)) {
+            if (controller1.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2)) {
                 downState();
-            } else if (controller1.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2)) {
+            } else if (controller1.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)) {
                 upState();
             }
             lbControl();

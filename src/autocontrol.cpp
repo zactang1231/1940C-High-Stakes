@@ -15,29 +15,29 @@
 #include <string>
 #include <type_traits>
 #include "robot-config.h"
-#include "lady-brown.h"
+#include "../include/lady-brown.h"
 
 #include <iostream>
 
-void autocontrolLoop(void* param) {
+void autocontrolLoop() {
     // leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     // rightMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
     leftMotors.set_current_limit(2500);
     rightMotors.set_current_limit(2500);
     intake.set_current_limit(2500);
-    preroller.set_current_limit(2500);
+    // preroller.set_current_limit(2500);
 
-    leftMotors.set_reversed(true);
-    rightMotors.set_reversed(false);
+    // leftMotors.set_reversed(true);
+    // rightMotors.set_reversed(false);
 
     // leftMotors.move_velocity(200);
     // rightMotors.move_velocity(200);
 
-    preroller.move_velocity(200);
+    // preroller.move_velocity(200);
     // uptake.move_velocity(200);
     
-    preroller.set_brake_mode (pros::E_MOTOR_BRAKE_COAST);
+    // preroller.set_brake_mode (pros::E_MOTOR_BRAKE_COAST);
     intake.set_brake_mode (pros::E_MOTOR_BRAKE_COAST);
     lb.set_brake_mode (pros::E_MOTOR_BRAKE_HOLD);
 

@@ -24,7 +24,7 @@
 // enum class LiftState { DEFAULT, LOADING_2, LOADING_1, SCORING, FLIPPING };
 
 // Array of target positions corresponding to each state
-const double states[5] = {0.0, 3200.0, 4000.0, 13000.0, 25000.0}; //change pls
+const double states[5] = {0.0, 3500.0, 5000.0, 15000.0, 25000.0}; //change pls
 
 int curState = 0;
 double target = states[0];
@@ -71,7 +71,7 @@ void lbControl() {
 
     double output = kP * error + kD * derivative;
 
-    if (abs(error) > 10) {
+    if (fabs(error) > 10) {
         lb.move(output);
     }
     // lb.move(output);

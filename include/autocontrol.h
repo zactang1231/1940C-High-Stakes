@@ -18,4 +18,4 @@
 
 #include <iostream>
 
-extern void autocontrolLoop(void* param);
+void autocontrolLoop();
