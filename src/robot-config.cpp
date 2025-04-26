@@ -26,7 +26,7 @@
 
 bool mogoActivated = false;
 bool doinkerActivated = false;
-bool intake2Activated = false;
+bool doinkerPistonActivated = false;
 
 // Resource states (enums)
 
@@ -80,7 +80,7 @@ pros::Rotation lb_sensor(-20);
 // pistons - migrated from robot-config.cpp from states code
 pros::adi::DigitalOut mogo('A');
 pros::adi::DigitalOut doinker('B');
-pros::adi::DigitalOut doinker2('C');
+pros::adi::DigitalOut doinkerPiston('C');
 
 // sensors - migrated from robot-config.cpp from states code
 pros::Imu inertial(7);
@@ -279,6 +279,15 @@ void doinkerButton() {
     } else {
         doinkerActivated = true;
         doinker.set_value(true);
+    }
+}
+void doinkerPistonButton() {
+    if (doinkerPistonActivated) {
+        doinkerPistonActivated = false;
+        doinkerPiston.set_value(false);
+    } else {
+        doinkerPistonActivated = true;
+        doinkerPiston.set_value(true);
     }
 }
 

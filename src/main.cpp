@@ -1,4 +1,5 @@
 #include "main.h"
+#include "pros/misc.h"
 #include "pros/motors.h"
 #include "robot-config.h"
 #include "autocontrol.h"
@@ -6,6 +7,7 @@
 #include "autonRedNeg.h"
 #include "autonBluePos.h"
 #include "autonBlueNeg.h"
+#include "lady-brown.h"
 
 
 /**
@@ -71,7 +73,13 @@ void competition_initialize() {
 void autonomous() {
 	// auton assist task, DO NOT remove
 	// autocontrolLoop();
-	chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
+	chassis.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
+	pros::Task lift_task([]{
+		while (true) {
+			lbControl();
+		}
+	});
+
 	// chassis.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
 	///////////// Select autonomous/////////////
 	pros::lcd::set_text(2, "Auton Start");
@@ -79,9 +87,8 @@ void autonomous() {
 	// redNeg();
 	// bluePos();
 	// blueNeg();
-	pros::lcd::set_text(3, "Auton Done");
 
-    pros::delay(100000000);
+	pros::lcd::set_text(3, "Auton Done");
 
 	chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
 }
@@ -126,8 +133,11 @@ void opcontrol() {
 			intake.move(0);
 		}
 
-		if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
+		if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
 			doinkerButton();
+		}
+		if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+			doinkerPistonButton();
 		}
 		if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
 			mogoButton();

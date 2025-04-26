@@ -69,6 +69,7 @@ extern void updateUptakeMotor();
 
 extern void mogoButton();
 extern void doinkerButton();
+extern void doinkerPistonButton();
 
 extern void rejectOnOff();
 extern void rejectRing();

@@ -31,21 +31,7 @@ double target = states[0];
 double previous_error = 0;
 
 void upState() {
-    if (curState == 1 || curState == 2) {
-        // for (int i = 0; i < 3; i++) {
-        //     pros::delay(50);
-        //     intake.move(127);
-        //     pros::delay(1000);
-        //     intake.move(0);
-        // }
-
-        // uptake_mutex.take();
-        intake.move(-127);
-        // uptake_mutex.give();
-
-        curState += 1;
-        target = states[curState];
-    } else if (curState < 5) {
+    if (curState < 5) {
         curState += 1;
         target = states[curState];
     }

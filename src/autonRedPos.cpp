@@ -28,20 +28,32 @@ void printTask()
     }
 }
 void redPos() {
+    curState = 1;
     chassis.setPose(-51, -60, 90);
-    chassis.moveToPoint(-16.7, -60, 3000);
+    chassis.moveToPoint(-16.8, -60, 3000);
     // chassis.turnToHeading(45, 2000);
-    chassis.moveToPose(-10, -55.5, 45, 2000);
-    chassis.turnToHeading(315, 2000);
-
-    // chassis.moveToPoint(-37, -60, 3000);
-
-    // pros::delay(100000000);
-    chassis.moveToPose(-24, -47.5, 45, 3000);
+    chassis.moveToPose(-10.5, -56, 55, 2000);
+    pros::delay(1000);
+    upState();
+    upState();
+    upState();
+    pros::delay(2000);
+    
+    downState();
+    chassis.moveToPose(12,-57.5,55,2000);
     chassis.turnToHeading(180, 2000);
-    chassis.moveToPoint(-24.5, -24, 3000);
+    chassis.turnToHeading(0, 2000);
+    downState();
+    downState();
+    downState();
+    // chassis.moveToPoint(-37, -60, 3000);
+    intake.move(127);
+    chassis.moveToPose(-28, -44.5, 180, 3000);
+    // chassis.turnToHeading(180, 2000);
+    chassis.moveToPoint(-24.5, -24, 3000, {.forwards = false});
+    pros::delay(1000);
+    mogo.set_value(true);
+    pros::delay(1000000000);
     chassis.moveToPoint(-11, -13, 3000);
-
-    pros::delay(100000000);
 }
 

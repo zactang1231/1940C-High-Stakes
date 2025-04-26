@@ -23,6 +23,8 @@
 
 // extern void LBSpinToTarget();
 
+extern int curState;
+
 void upState();
 void downState();
 void lbControl();

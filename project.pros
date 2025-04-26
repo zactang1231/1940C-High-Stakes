@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "jgreidf",
+    "project_name": "blep",
     "target": "v5",
     "templates": {
       "LemLib": {
