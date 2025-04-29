@@ -1,1 +1,1 @@
-void blueNeg();
+extern void blueNeg();

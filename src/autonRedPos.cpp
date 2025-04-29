@@ -18,16 +18,17 @@
 #include "../include/lady-brown.h"
 
 #include <iostream>
-void printTask()
-{
-    while(true)
-    {
-        std::string outtext = "X: " + std::to_string(chassis.getPose().x) + "Y: " + std::to_string(chassis.getPose().y);
-        pros::lcd::set_text(4, outtext);
-        pros::delay(200);
-    }
-}
+// void printTask()
+// {
+//     while(true)
+//     {
+//         std::string outtext = "X: " + std::to_string(chassis.getPose().x) + "Y: " + std::to_string(chassis.getPose().y);
+//         pros::lcd::set_text(4, outtext);
+//         pros::delay(200);
+//     }
+// }
 void redPos() {
+    controller1.rumble("...");
     curState = 1;
     chassis.setPose(-51, -60, 90);
     chassis.moveToPoint(-16.8, -60, 3000);

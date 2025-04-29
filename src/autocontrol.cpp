@@ -47,7 +47,7 @@ void autocontrolLoop() {
 
     // this runs during auton the whole time
     while (true) {
-        rejectRing();
+        // rejectRing();
         // LBSpinToTarget();
 
         // delay so the Brain doesn't explode

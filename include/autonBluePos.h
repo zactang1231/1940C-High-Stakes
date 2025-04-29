@@ -1,1 +1,1 @@
-void bluePos();
+extern void bluePos();

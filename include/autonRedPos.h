@@ -1,1 +1,1 @@
-void redPos();
+extern void redPos();

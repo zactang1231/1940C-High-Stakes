@@ -312,7 +312,6 @@ void rejectRing() {
                 intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
                 intake.move(127);
                 controller1.clear();
-                controller1.print(0,0, "bye bye red ring");
                 pros::delay(500);
                 // uptake_mutex.give();
             }
@@ -327,7 +326,6 @@ void rejectRing() {
                 intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
                 intake.move(127);
                 controller1.clear();
-                controller1.print(0,0, "bye bye blue ring");
                 // uptake_mutex.give();
             }
         }

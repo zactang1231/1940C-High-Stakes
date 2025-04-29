@@ -1,1 +1,1 @@
-void redNeg();
+extern void redNeg();

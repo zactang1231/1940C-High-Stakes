@@ -1,4 +1,3 @@
-#include "main.h"
 #include "pros/misc.h"
 #include "pros/motors.h"
 #include "robot-config.h"
@@ -73,22 +72,24 @@ void competition_initialize() {
 void autonomous() {
 	// auton assist task, DO NOT remove
 	// autocontrolLoop();
-	chassis.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
-	pros::Task lift_task([]{
-		while (true) {
+	pros::Task lift_task(
+		+[](void*){
+		  while(true) {
 			lbControl();
-		}
-	});
+			pros::delay(20);
+		  }
+		},
+		nullptr,
+		"lift_task"
+	  );
+	
+	chassis.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
 
-	// chassis.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
 	///////////// Select autonomous/////////////
-	pros::lcd::set_text(2, "Auton Start");
 	redPos();
 	// redNeg();
 	// bluePos();
 	// blueNeg();
-
-	pros::lcd::set_text(3, "Auton Done");
 
 	chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
 }
@@ -120,8 +121,8 @@ void opcontrol() {
 		//                  (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);  // Prints status of the emulated screen LCDs
 
 		// Arcade control scheme
-		int dir = master.get_analog(ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
-		int turn = master.get_analog(ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
+		int dir = controller1.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
+		int turn = controller1.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
 		leftMotors.move(dir + turn);                      // Sets left motor voltage
 		rightMotors.move(dir - turn);                     // Sets right motor voltage
 
