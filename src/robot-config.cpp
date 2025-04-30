@@ -42,11 +42,11 @@ bool previousL1 = false;
 
 bool rejectingOn = false;
 
-float trackWidth = 13.0;
-float wheelDiameter = 3.0; 
+float trackWidth = 8.0;
+float wheelDiameter = 3.25; 
 
-float horizontalOffset = -5.02;
-float verticalOffset = -0.75;
+float horizontalOffset = 7.5;
+float verticalOffset = -3.0;
 
 char acceptColour;
 
@@ -99,10 +99,10 @@ lemlib::TrackingWheel vertical(&verticalEnc, lemlib::Omniwheel::NEW_2, verticalO
 // drivetrain settings
 lemlib::Drivetrain drivetrain(&leftMotors, // left motor group
                               &rightMotors, // right motor group
-                              12.6,
+                              8,
                               lemlib::Omniwheel::NEW_325,
                               450, // drivetrain rpm is 350 (84/48*200)
-                              8 // according to lemlib, centre traction wheels means horizontal drift is approx 8. we'll probs tune this later
+                              2 // according to lemlib, centre traction wheels means horizontal drift is approx 8. we'll probs tune this later
 );
 
 // lateral motion controller

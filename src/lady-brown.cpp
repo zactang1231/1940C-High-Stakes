@@ -24,9 +24,9 @@
 // enum class LiftState { DEFAULT, LOADING_2, LOADING_1, SCORING, FLIPPING };
 
 // Array of target positions corresponding to each state
-const double states[5] = {0.0, 3500.0, 5000.0, 15000.0, 25000.0}; //change pls
+const double states[5] = {0.0, 3400.0, 4800.0, 15000.0, 25000.0}; //change pls
 
-int curState = 0;
+int curState;
 double target = states[0];
 double previous_error = 0;
 
@@ -45,30 +45,41 @@ void downState() {
 }
  
 void lbControl() {
-    // Gains
-    double kP = 0.02;
-    double kD = 0.0005;
+    lb.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+        if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+            lb.move(127);
+        } else if (controller1.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+            lb.move(-127);
+        } else {
+            lb.move(0);
+        }
+        previous_error = target - lb_sensor.get_position();
+      } 
+    else {
+    
+        target = states[curState];
 
-    double dt = 0.02; // 20 ms time delay
+        // Gains
+        double kP = 0.02;
+        double kD = 0.0005;
 
-    double error = target - lb_sensor.get_position();
+        double dt = 0.02; // 20 ms time delay
 
-    double derivative = (error - previous_error) / dt;
+        double error = target - lb_sensor.get_position();
 
-    double output = kP * error + kD * derivative;
+        double derivative = (error - previous_error) / dt;
 
-    if (fabs(error) > 10) {
-        lb.move(output);
+        double output = kP * error + kD * derivative;
+
+        if (fabs(error) > 10) {
+            lb.move(output);
+        }
+        // lb.move(output);
+
+        previous_error = error;
+
+        pros::delay(20);
     }
-    // lb.move(output);
-
-    previous_error = error;
-
-    pros::delay(20);
-
-    pros::screen::print(TEXT_LARGE,0,"Position: %d", lb_sensor.get_position());
-    pros::screen::print(TEXT_LARGE,10,"Target: %d", target);
-    pros::screen::print(TEXT_LARGE,5,"Error: %d", error);
-
 }
 

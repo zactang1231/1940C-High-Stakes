@@ -24,6 +24,8 @@
 // extern void LBSpinToTarget();
 
 extern int curState;
+extern double target;
+extern const double states;
 
 void upState();
 void downState();

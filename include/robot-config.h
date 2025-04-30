@@ -23,6 +23,7 @@ extern pros::Rotation lb_sensor;
 
 extern pros::adi::DigitalOut mogo;
 extern pros::adi::DigitalOut doinker;
+extern pros::adi::DigitalOut doinkerPiston;
 
 extern pros::Imu inertial;
 extern pros::Optical reject;
