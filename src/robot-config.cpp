@@ -80,6 +80,7 @@ pros::Rotation lb_sensor(-20);
 // pistons - migrated from robot-config.cpp from states code
 pros::adi::DigitalOut mogo('A');
 pros::adi::DigitalOut doinker('B');
+pros::adi::DigitalOut doinkerOFF('D');
 pros::adi::DigitalOut doinkerPiston('C');
 
 // sensors - migrated from robot-config.cpp from states code
@@ -276,9 +277,11 @@ void doinkerButton() {
     if (doinkerActivated) {
         doinkerActivated = false;
         doinker.set_value(false);
+        doinkerOFF.set_value(true);
     } else {
         doinkerActivated = true;
         doinker.set_value(true);
+        doinkerOFF.set_value(false);
     }
 }
 void doinkerPistonButton() {
@@ -393,8 +396,6 @@ void turnToAngle(double targetAngleDegrees, int maxSpeed) {
 
 void moveDistance(double targetDistanceInches, int maxSpeed) {
     // Reset tracking wheel
-    horizontal.reset();
-    vertical.reset();
 
     // Start motors
     leftMotors.move_velocity(maxSpeed);

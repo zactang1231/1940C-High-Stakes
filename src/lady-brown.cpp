@@ -24,7 +24,7 @@
 // enum class LiftState { DEFAULT, LOADING_2, LOADING_1, SCORING, FLIPPING };
 
 // Array of target positions corresponding to each state
-const double states[5] = {0.0, 3400.0, 4800.0, 15000.0, 25000.0}; //change pls
+const double states[5] = {0.0, 2800.0, 4800.0, 15000.0, 25000.0}; //change pls
 
 int curState;
 double target = states[0];

@@ -34,6 +34,7 @@
 void initialize() {
 	pros::lcd::initialize();
 
+	doinkerButton();
 	// pros::lcd::register_btn1_cb(on_center_button);
 }
 
@@ -98,8 +99,8 @@ void autonomous() {
 	///////////// Select autonomous/////////////
 	// redPos();
 	// redNeg();
-	bluePos();
-	// blueNeg();
+	// bluePos();
+	blueNeg();
 
 	chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
 }
