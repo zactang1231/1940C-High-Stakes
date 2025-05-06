@@ -20,26 +20,28 @@
 #include <iostream>
 
 void bluePos() {
+  doinkerButton();
     // same brake modes
   leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
   rightMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
   lb.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
-  curState = 1;
+  curState = 2;
   // flip X (–51 → +51) and flip your initial heading (  90 → –90)
   chassis.setPose(+51, -60, -90);
 
   // 1) drive out to the first point, same timeout & speed
   chassis.moveToPoint(+13, -60, 4000, {.maxSpeed = 80});
-  pros::delay(1600);
+  pros::delay(1500);
 
   // 2) lift up
   upState();
   upState();
-  upState();
+  // upState();
+  // spros::delay(400);
 
   // 3) turn the mirror of  48° → –48°
-  chassis.turnToHeading(-48, 1000);
+  chassis.turnToHeading(-38, 1000);
 
   // 4) drive back in X, but backwards; (-16 → +16)
   chassis.moveToPoint(+16, -63, 4000, {.forwards = false});
@@ -50,14 +52,21 @@ void bluePos() {
   downState();
   downState();
 
-  pros::delay(500);
+  chassis.moveToPoint(+13, -60, 4000, {.forwards = false});
+
+  // pros::delay(1000000);
+  // leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+  // rightMotors.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+
+  chassis.moveToPoint(17, -66, 4000, {.forwards = false});
 
   // 6) deploy doinker
   doinkerPiston.set_value(true);
   pros::delay(500);
 
   // 7) turn –32° instead of +32°
-  chassis.turnToHeading(-70, 700);
+  chassis.turnToHeading(-65, 700);
+  pros::delay(300);
 
   // 8) swing in for the cone (-10 → +10), still backwards
   chassis.moveToPoint(+10, -64, 4000, {.forwards = false});

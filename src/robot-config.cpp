@@ -48,8 +48,6 @@ float wheelDiameter = 3.25;
 float horizontalOffset = 7.5;
 float verticalOffset = -3.0;
 
-char acceptColour;
-
 // controller
 pros::Controller controller1(pros::E_CONTROLLER_MASTER);
 
@@ -85,7 +83,7 @@ pros::adi::DigitalOut doinkerPiston('C');
 
 // sensors - migrated from robot-config.cpp from states code
 pros::Imu inertial(7);
-pros::Optical reject(4);
+pros::Optical reject(19);
 
 /* TRACKING WHEELS */
 
@@ -294,44 +292,53 @@ void doinkerPistonButton() {
     }
 }
 
+int timeElapsed;
 void rejectRing() {
-    if (rejectingOn) {
-        // Colour sorting
-        pros::c::optical_rgb_s_t rgb = reject.get_rgb();
-        int red = rgb.red;     // get red 
-        int green = rgb.green; // get green 
-        int blue = rgb.blue;   // get blue
-        // Define thresholds for red and blue detection
-        const int RED_THRESHOLD = 1000;
-        const int BLUE_THRESHOLD = 1000;
+    // Colour sorting
+    pros::c::optical_rgb_s_t rgb = reject.get_rgb();
+    reject.set_led_pwm(100);
+    int red = rgb.red;     // get red 
+    int green = rgb.green; // get green 
+    int blue = rgb.blue;   // get blue
+    // Define thresholds for red and blue detection
+    const int RED_THRESHOLD = 1000;
+    const int BLUE_THRESHOLD = 1000;
 
-        if (acceptColour == 'b') {
-            if (red > RED_THRESHOLD && green < red && blue < red) {
+    if (acceptColour == 'b') {
+        if (red > RED_THRESHOLD && green < red && blue < red) {
+            timeElapsed += 20;
+            if (timeElapsed > 500) {
                 // uptake_mutex.take();
                 intake.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-                pros::delay(25);
+                pros::delay(30);
                 intake.move(0);
                 pros::delay(1000);
                 intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
                 intake.move(127);
                 controller1.clear();
-                pros::delay(500);
+                pros::delay(300);
                 // uptake_mutex.give();
             }
         }
-        else if (acceptColour == 'r') {
-            if (blue > BLUE_THRESHOLD && red < blue && green < blue) {
-                // uptake_mutex.take();
-                intake.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-                pros::delay(25);
-                intake.move(0);
-                pros::delay(1000);
-                intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-                intake.move(127);
-                controller1.clear();
-                // uptake_mutex.give();
-            }
+    }
+    else if (acceptColour == 'r') {
+        if (blue > BLUE_THRESHOLD && red < blue && green < blue) {
+            timeElapsed += 20;
+            if (timeElapsed > 300) {
+            // uptake_mutex.take();
+            intake.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+            pros::delay(30);
+            intake.move(0);
+            pros::delay(300);
+            intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+            intake.move(127);
+            controller1.clear();
+            // uptake_mutex.give();
         }
+            
+        }
+    } else {
+        timeElapsed = 0;
     }
 }
 

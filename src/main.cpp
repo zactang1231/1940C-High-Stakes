@@ -69,6 +69,7 @@ void competition_initialize() {
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
+
 void autonomous() {
 	// auton assist task, DO NOT remove
 	// autocontrolLoop();
@@ -99,8 +100,8 @@ void autonomous() {
 	///////////// Select autonomous/////////////
 	// redPos();
 	// redNeg();
-	// bluePos();
-	blueNeg();
+	bluePos();
+	// blueNeg();
 
 	chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
 }
@@ -118,6 +119,9 @@ void autonomous() {
  * operator control task will be stopped. Re-enabling the robot will restart the
  * task, not resume it from where it left off.
  */
+
+char acceptColour = 'r';
+
 void opcontrol() {
 	opcontrolInit();
 	// pros::MotorGroup left_mg({1, -2, -3});    // Creates a motor group with forwards ports 1 & 3 and reversed port 2
@@ -152,6 +156,9 @@ void opcontrol() {
 		if (controller1.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
 			mogoButton();
 		}
-		pros::delay(20);   
+
+		// rejectRing();
+		pros::delay(10);   
 	}
+
 }
