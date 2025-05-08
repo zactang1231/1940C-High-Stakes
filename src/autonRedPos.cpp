@@ -32,44 +32,68 @@ void redPos() {
     leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     rightMotors.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     lb.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-    curState = 1;
-    chassis.setPose(-51, -60, 90);
-
-    chassis.moveToPoint(-13, -60, 4000, {.maxSpeed = 80}); // true x: -13
-    pros::delay(1600);
-    upState();
-    upState();
-    upState();
-    chassis.turnToHeading(48, 1000);
-    chassis.moveToPoint(-16, -63, 4000, {.forwards = false});
-    downState();
-    downState();
-    downState();
-    downState();
-
-    pros::delay(1000);
-
-    doinkerPiston.set_value(true);
-    chassis.turnToHeading(32, 700);
-    chassis.moveToPoint(-10, -64, 4000, {.forwards = false});
-
-    pros::delay(1000);
-
-    chassis.moveToPose(-51, -60, 90, 4000, {.forwards = false, .maxSpeed = 80});
-    pros::delay(2800);
-    doinkerPiston.set_value(false);
-    chassis.turnToHeading(60, 300);
-    chassis.turnToHeading(120, 300);
-    chassis.turnToHeading(90, 300);
-    intake.move(-127);
-    chassis.turnToPoint(-23.5, -50, 800);
-    chassis.moveToPoint(-23.5, -50, 2000);
-    chassis.turnToPoint(-23.5, -23.5, 800, {.forwards = false});
-    intake.move(0);
-    chassis.moveToPoint(-23.5, -14, 5000, {.forwards = false, .maxSpeed = 40});
-    pros::delay(1500);
+    curState = 0;
+    // chassis.setPose(-51, -60, 90);
+    chassis.setPose(-62,-33,270);
+    chassis.moveToPose(-38.772,-32.984,60,2000, {.forwards = false});
+    chassis.turnToPoint(-24, -23.5, 2000, {.forwards = false});
+    chassis.moveToPoint(-24,-23.5,2000, {.forwards = false, .maxSpeed = 80});
+    pros::delay(800);
     mogo.set_value(true);
+    pros::delay(800);
     intake.move(-127);
+    chassis.moveToPoint(-23.5,-47,1000);
+    pros::delay(500);
+    chassis.moveToPose(-59,-59,113,4000);
+    chassis.moveToPoint(-55,-55,4000, {.forwards = false});
+    chassis.moveToPose(-59,-59,113,4000);
+
+
+    // rush
+    // chassis.moveToPoint(-13, -60, 4000, {.maxSpeed = 80}); // true x: -13
+    // pros::delay(1600);
+    // // upState();
+    // // upState();
+    // // upState();
+    // chassis.turnToHeading(235, 1000);
+    // chassis.moveToPoint(-16, -62.5, 4000, {.forwards = false});
+    // downState();
+    // downState();
+    // downState();
+    // downState();
+
+    // pros::delay(1000);
+
+    // doinkerPiston.set_value(true);
+    // chassis.turnToHeading(32, 700);
+    // chassis.moveToPoint(-10, -64, 4000, {.forwards = false});
+
+    // pros::delay(1000);
+
+    // chassis.moveToPose(-51, -60, 90, 4000, {.forwards = false, .maxSpeed = 80});
+    // pros::delay(2800);
+    // doinkerPiston.set_value(false);
+    // chassis.turnToHeading(60, 300);
+    // chassis.turnToHeading(120, 300);
+    // chassis.turnToHeading(90, 300);
+    // intake.move(-127);
+    // chassis.turnToPoint(-23.5, -50, 800);
+    // chassis.moveToPoint(-23.5, -50, 2000);
+    // chassis.turnToPoint(-23.5, -23.5, 800, {.forwards = false});
+    // intake.move(0);
+    // chassis.moveToPoint(-23.5, -14, 5000, {.forwards = false, .maxSpeed = 40});
+    // pros::delay(1500);
+    // mogo.set_value(true);
+    // intake.move(-127);
+    // chassis.moveToPose(-31.6, -30.5, 45,800);
+
+
+
+
+
+    // upState();
+    // upState();
+    // upState();
 //     //endblock
 //     pros::delay(1000000000);
 //     leftMotors.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);

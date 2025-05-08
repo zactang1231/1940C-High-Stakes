@@ -275,11 +275,9 @@ void doinkerButton() {
     if (doinkerActivated) {
         doinkerActivated = false;
         doinker.set_value(false);
-        doinkerOFF.set_value(true);
     } else {
         doinkerActivated = true;
         doinker.set_value(true);
-        doinkerOFF.set_value(false);
     }
 }
 void doinkerPistonButton() {
@@ -314,7 +312,7 @@ void rejectRing() {
                 intake.move(0);
                 pros::delay(1000);
                 intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-                intake.move(127);
+                intake.move(-127);
                 controller1.clear();
                 pros::delay(300);
                 // uptake_mutex.give();
@@ -331,7 +329,7 @@ void rejectRing() {
             intake.move(0);
             pros::delay(300);
             intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-            intake.move(127);
+            intake.move(-127);
             controller1.clear();
             // uptake_mutex.give();
         }

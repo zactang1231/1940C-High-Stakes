@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "Drive code",
+    "project_name": "Blue Pos",
     "target": "v5",
     "templates": {
       "LemLib": {
@@ -298,7 +298,7 @@
       }
     },
     "upload_options": {
-      "slot": 1,
+      "slot": 4,
       "icon": "pizza"
     },
     "use_early_access": false
